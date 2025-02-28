@@ -131,7 +131,6 @@ This document chronicles key architectural decisions made during the development
   - Added refresh functionality for user messages
   - Updated UI to show these controls on hover
   - Enhanced state management to handle message operations
-
 ## 11. Visual Effects System
 - **Date**: 28/02/2025
 - **Context**: Need for enhanced interactive elements
@@ -147,6 +146,22 @@ This document chronicles key architectural decisions made during the development
   - Implemented intensity control for future user customization
   - Enhanced UI responsiveness with visual feedback
 
+## 12. Markdown Rendering Implementation
+- **Date**: 28/02/2025
+- **Context**: Need for rich text formatting in chat messages
+- **Decision**: Implemented markdown rendering using react-markdown and remark-gfm
+- **Rationale**:
+  - Enhances readability of complex information
+  - Allows for better structured responses with headers, lists, code blocks, etc.
+  - Improves the presentation of Dhamma teachings with proper formatting
+  - Provides a more engaging and professional user experience
+- **Implications**:
+  - Added react-markdown and remark-gfm dependencies
+  - Configured Tailwind typography plugin for styling markdown content
+  - Updated ChatMessage component to render markdown instead of plain text
+  - Enhanced styling to ensure consistent appearance of markdown elements
+
+## Pending Decisions
 ## Pending Decisions
 
 ### Source Reference System

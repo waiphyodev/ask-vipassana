@@ -20,6 +20,7 @@
 - [x] Message deletion functionality (for both user and assistant messages)
 - [x] Conversation refresh from specific user message
 - [x] Enhanced visual effects for interactive elements
+- [x] Markdown rendering in chat messages
 
 ### Backend Integration
 - [x] API route for chat functionality
@@ -36,6 +37,7 @@
 - [x] Floating timer button
 - [x] Interactive message controls (delete and refresh)
 - [x] Visual feedback for interactive elements
+- [x] Markdown rendering in chat messages with proper styling
 
 ### UI Improvements
 - [x] Fixed text centering on home screen

@@ -9,6 +9,7 @@
 - Implementing automatic conversation clearing after inactivity
 - Adding message deletion and refresh functionality
 - Improving visual effects for interactive elements
+- Implementing markdown rendering in chat messages
 
 ### Recent Activities
 - Created SuggestedQuestions component to help first-time users
@@ -23,6 +24,7 @@
 - Fixed text centering on home screen
 - Removed double background from buttons
 - Tested all new components in the browser
+- Implemented markdown rendering in chat messages using react-markdown and remark-gfm
 
 ### Testing Results
 - First-time user guidance system works correctly, showing welcome message and suggested questions
@@ -31,6 +33,7 @@
 - Automatic conversation clearing logic is in place but requires longer-term testing
 - Message deletion and refresh functionality works as expected
 - Visual effects enhance the user experience with subtle animations
+- Markdown rendering works correctly in chat messages, supporting formatting like headers, lists, code blocks, etc.
 
 ### Current Implementation Details
 - First-time user detection using localStorage
@@ -40,6 +43,7 @@
 - Automatic clearing of chat history after 7 days of inactivity
 - Message management with delete and refresh options
 - Visual effects system with configurable intensity
+- Markdown rendering in chat messages for rich text formatting
 
 ### Next Actions
 1. Implement source reference system for citations

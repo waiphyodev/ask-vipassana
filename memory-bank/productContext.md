@@ -49,3 +49,8 @@
 - API integration with N8N webhook
 - UI components following the specified design aesthetic
 - Responsive design for various device sizes
+- First-time user guidance with welcome message and suggested questions
+- Meditation timer with breathing animations
+- Message management (delete and refresh functionality)
+- Visual effects for interactive elements
+- Markdown rendering in chat messages for rich text formatting

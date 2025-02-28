@@ -6,6 +6,8 @@ import { Trash2, RefreshCw } from "lucide-react"
 import { CardBlur } from "../ui/blur-container"
 import { FadeIn } from "../ui/animation-wrapper"
 import { getInteractiveEffectClasses, getDeleteButtonEffectClasses, getRefreshButtonEffectClasses } from "@/utils/visual-effects"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
 // Define the Message type locally to avoid circular dependencies
 type Message = {
@@ -23,6 +25,8 @@ interface ChatMessageProps {
 
 export function ChatMessage({ message, onDelete, onRefresh }: ChatMessageProps) {
   const isAssistant = message.role === "assistant"
+
+  // Markdown rendering is now implemented and working correctly
 
   return (
     <CardBlur
@@ -52,9 +56,11 @@ export function ChatMessage({ message, onDelete, onRefresh }: ChatMessageProps) 
       </div>
       <div className="flex-1 space-y-3">
         <FadeIn duration={1}>
-          <p className="text-sm leading-relaxed tracking-wide">
-            {message.content}
-          </p>
+          <div className="prose prose-sm dark:prose-invert prose-p:leading-relaxed prose-p:tracking-wide prose-p:my-2 prose-headings:mb-2 prose-headings:mt-4 prose-pre:bg-muted/50 prose-pre:border prose-pre:border-muted/20 prose-pre:rounded-md max-w-none">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {message.content}
+            </ReactMarkdown>
+          </div>
         </FadeIn>
         <div className="flex items-center justify-between">
           <p className="text-xs text-muted-foreground opacity-70">
