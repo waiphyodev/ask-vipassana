@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 const geistSans = localFont({
@@ -14,8 +15,11 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'CodeGuide Starter Lite',
-  description: 'Starter kit from codeguide.dev',
+  title: 'Ask Vipassana - Meditation Guidance',
+  description: 'Access authentic Vipassana Buddhist wisdom through mindful conversation',
+  icons: {
+    icon: '/icon.png',
+  },
 }
 
 export default function RootLayout({
@@ -24,8 +28,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
