@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import Image from "next/image"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import { SendIcon } from "lucide-react"
 import { FadeIn } from "@/components/ui/animation-wrapper"
 
 interface ChatInputProps {
@@ -55,17 +55,9 @@ export function ChatInput({ onSendMessage, isLoading }: ChatInputProps) {
             type="submit"
             size="icon"
             disabled={!message.trim() || isLoading}
-            className="rounded-full transition-all duration-500 hover:scale-105 active:scale-95 overflow-hidden p-0"
+            className="rounded-full transition-all duration-500 hover:scale-105 active:scale-95"
           >
-            <div className="flex items-center justify-center h-full w-full bg-primary">
-              <Image
-                src="/logo.webp"
-                alt="Send"
-                width={24}
-                height={24}
-                className="object-cover"
-              />
-            </div>
+            <SendIcon className="size-4" />
             <span className="sr-only">Send message</span>
           </Button>
         </div>
