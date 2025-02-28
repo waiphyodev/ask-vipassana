@@ -57,7 +57,7 @@ export default function Home() {
         </FadeIn>
       </SlideUp>
 
-      <footer className="fixed bottom-0 w-full py-4 text-center text-sm text-white/70">
+      <footer className="fixed bottom-0 w-full py-4 text-center text-sm">
         <p>Created with ❤️ by <a href="https://tarasenko.dev?utm_source=askvipassana" target="_blank" rel="noopener noreferrer" className="underline hover:text-white transition-colors">Igor Tarasenko</a></p>
         <div className="flex justify-center space-x-4 mt-1">
           <a href="https://x.com/sa1k0s" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">

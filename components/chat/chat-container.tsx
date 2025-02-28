@@ -242,7 +242,7 @@ export function ChatContainer() {
                   Meditation Timer
                 </Button>
 
-                <footer className="text-center text-xs text-white/70">
+                <footer className="text-center text-xs">
                   <p>Created with ❤️ by <a href="https://tarasenko.dev?utm_source=askvipassana" target="_blank" rel="noopener noreferrer" className="underline hover:text-white transition-colors">Igor Tarasenko</a></p>
                 </footer>
 
