@@ -1,32 +1,34 @@
 [![CodeGuide](/codeguide-backdrop.svg)](https://codeguide.dev)
 
 
-# CodeGuide Starter Lite
+# Ask Vipassana
 
-A modern web application starter template built with Next.js 14, featuring authentication, database integration.
+A mindful chatbot application providing authentic Vipassana Buddhist wisdom through a conversational interface. This tool offers clear guidance on meditation techniques, Dhamma teachings, and practical spiritual advice while maintaining the purity and non-commercial nature of Vipassana meditation.
+
+## Features
+
+- 🧘 Minimalist chat interface embodying Vipassana simplicity
+- 🌅 Subtle, mindful animations enhancing the experience
+- ⏲️ Optional meditation timer integrated within chat
+- 📚 Source reference system citing original texts
+- 💭 Contextual memory for continuous spiritual guidance
+- 🔒 Privacy-focused with local storage only
 
 ## Tech Stack
 
-- **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
-- **Authentication:** [Clerk](https://clerk.com/)
-- **Database:** [Supabase](https://supabase.com/)
+- **Framework:** [Next.js 14](https://nextjs.org/) with TypeScript
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
-
-## Prerequisites
-
-Before you begin, ensure you have the following:
-- Node.js 18+ installed
-- A [Clerk](https://clerk.com/) account for authentication
-- A [Supabase](https://supabase.com/) account for database
-- Generated project documents from [CodeGuide](https://codeguide.dev/) for best development experience
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Backend:** N8N server with custom API endpoint
+- **Storage:** Local storage for chat history
 
 ## Getting Started
 
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd codeguide-starter-lite
+   cd ask-vipassana
    ```
 
 2. **Install dependencies**
@@ -43,7 +45,7 @@ Before you begin, ensure you have the following:
      ```bash
      cp .env.example .env
      ```
-   - Fill in the environment variables in `.env` (see Configuration section below)
+   - Add your N8N API endpoint and token
 
 4. **Start the development server**
    ```bash
@@ -54,80 +56,50 @@ Before you begin, ensure you have the following:
    pnpm dev
    ```
 
-5. **Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.**
-
-## Configuration
-
-### Clerk Setup
-1. Go to [Clerk Dashboard](https://dashboard.clerk.com/)
-2. Create a new application
-3. Go to API Keys
-4. Copy the `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY`
-
-### Supabase Setup
-1. Go to [Supabase Dashboard](https://app.supabase.com/)
-2. Create a new project
-3. Go to Project Settings > API
-4. Copy the `Project URL` as `NEXT_PUBLIC_SUPABASE_URL`
-5. Copy the `anon` public key as `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+5. **Open [http://localhost:3000](http://localhost:3000) with your browser**
 
 ## Environment Variables
 
 Create a `.env` file in the root directory with the following variables:
 
 ```env
-# Clerk Authentication
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
-CLERK_SECRET_KEY=your_secret_key
-
-# Supabase
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+# N8N API
+NEXT_PUBLIC_N8N_API_ENDPOINT=your_n8n_endpoint
+NEXT_PUBLIC_N8N_API_TOKEN=your_api_token
 ```
-
-## Features
-
-- 🔐 Authentication with Clerk
-- 📦 Supabase Database
-- 🎨 Modern UI with Tailwind CSS
-- 🚀 App Router Ready
-- 🔄 Real-time Updates
-- 📱 Responsive Design
 
 ## Project Structure
 
 ```
-codeguide-starter/
+ask-vipassana/
 ├── app/                # Next.js app router pages
 ├── components/         # React components
-├── utils/             # Utility functions
+│   ├── ui/            # shadcn/ui components
+│   └── providers/     # Context providers
+├── hooks/             # Custom React hooks
+├── lib/               # Utility functions
 ├── public/            # Static assets
-├── styles/            # Global styles
-├── documentation/     # Generated documentation from CodeGuide
-└── supabase/          # Supabase configurations and migrations
+└── types/             # TypeScript type definitions
 ```
 
-## Documentation Setup
+## Design Philosophy
 
-To implement the generated documentation from CodeGuide:
+The interface embodies core Vipassana principles:
 
-1. Create a `documentation` folder in the root directory:
-   ```bash
-   mkdir documentation
-   ```
+- **Simplicity:** Clean, distraction-free design
+- **Mindfulness:** Purposeful, subtle animations
+- **Authenticity:** Direct connection to original teachings
+- **Non-materialistic:** No commercialization or gamification
+- **Privacy:** Minimal data storage, no tracking
 
-2. Place all generated markdown files from CodeGuide in this directory:
-   ```bash
-   # Example structure
-   documentation/
-   ├── project_requirements_document.md             
-   ├── app_flow_document.md
-   ├── frontend_guideline_document.md
-   └── backend_structure_document.md
-   ```
+## Ethical Considerations
 
-3. These documentation files will be automatically tracked by git and can be used as a reference for your project's features and implementation details.
+- This is an AI-assisted tool, not a replacement for human teachers
+- No tracking of personal meditation experiences
+- No commercialization of Dhamma content
+- Easy conversation history clearing
+- Clear disclaimers about AI limitations
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please ensure they align with the project's ethical guidelines and maintain its non-commercial nature.
