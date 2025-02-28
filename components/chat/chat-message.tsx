@@ -36,28 +36,29 @@ export function ChatMessage({ message, onDelete, onRefresh }: ChatMessageProps) 
   return (
     <CardBlur
       className={cn(
-        "w-full mb-4 transition-all duration-500 group max-w-[85%]",
+        "w-full mb-6 transition-all duration-500 group max-w-[85%] relative overflow-hidden",
         isAssistant
-          ? "bg-muted/30 dark:bg-muted/20 border border-muted/20 rounded-lg rounded-bl-sm p-4 ml-0 mr-auto"
-          : "bg-primary/5 dark:bg-primary/20 border border-primary/10 rounded-lg rounded-br-sm p-4 ml-auto mr-0 hover:bg-primary/10 dark:hover:bg-primary/30",
+          ? "border border-[#E5D9C9]/60 dark:border-[#E5D9C9]/10  rounded-[16px] rounded-bl-[6px] p-5 ml-0 mr-auto text-[#332E2B] dark:text-[#E5D9C9]"
+          : "border border-[#D2885A]/20 dark:border-[#E5D9C9]/10  rounded-[16px] rounded-br-[6px] p-5 ml-auto mr-0 hover:bg-white dark:hover:bg-[#D2885A]/40",
         getInteractiveEffectClasses(),
-        getGlowEffectClasses("", !isAssistant),
         getShineAnimationClasses()
       )}
     >
-      <div className="flex-1 space-y-3">
-        <FadeIn duration={1}>
-          <div className="prose prose-sm dark:prose-invert prose-p:leading-relaxed prose-p:tracking-wide prose-p:my-2 prose-headings:mb-2 prose-headings:mt-4 prose-pre:bg-muted/50 prose-pre:border prose-pre:border-muted/20 prose-pre:rounded-md max-w-none">
+      <div className="flex-1 space-y-4">
+        <FadeIn duration={1.2}>
+          <div className={cn(
+            "prose prose-sm prose-p:leading-relaxed prose-p:tracking-wide prose-p:my-3 prose-headings:mb-3 prose-headings:mt-5 max-w-none",
+            isAssistant
+              ? "prose-pre:bg-[#E5D9C9]/50 prose-pre:border prose-pre:border-[#E5D9C9]/40 prose-pre:rounded-md dark:prose-invert dark:prose-pre:bg-[#332E2B] dark:prose-pre:border-[#E5D9C9]/30"
+              : "prose-pre:bg-[#FAF9F6] prose-pre:border prose-pre:border-[#D2885A]/10 prose-pre:rounded-md dark:prose-invert dark:prose-pre:bg-[#D2885A]/20 dark:prose-pre:border-[#D2885A]/30"
+          )}>
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {message.content}
             </ReactMarkdown>
           </div>
         </FadeIn>
-        <div className="flex items-center justify-between">
-          <p className="text-xs text-muted-foreground opacity-70">
-            {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-          </p>
-          <div className="flex space-x-2">
+        <div className="flex items-center justify-end absolute bottom-5 right-5">
+          <div className="flex space-x-3">
             {!isAssistant && onRefresh && (
               <button
                 onClick={() => onRefresh(message.id)}

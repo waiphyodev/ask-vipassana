@@ -49,14 +49,12 @@ export default function Home() {
         </FadeIn>
 
         <FadeIn delay={1.2} duration={1.5}>
-          <FloatingBlur className="inline-block mt-6">
-            <Link
-              href="/chat"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-sm font-medium text-primary-foreground ring-offset-background transition-all duration-500 hover:bg-primary/90 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            >
-              Start Conversation
-            </Link>
-          </FloatingBlur>
+          <Link
+            href="/chat"
+            className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-sm font-medium text-primary-foreground ring-offset-background transition-all duration-500 hover:bg-primary/90 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
+            Start Conversation
+          </Link>
         </FadeIn>
       </SlideUp>
     </main>

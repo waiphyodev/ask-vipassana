@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface BlurContainerProps {
   children: ReactNode;
@@ -20,6 +20,27 @@ export function BlurContainer({
   borderRadius = "1rem",
   isGlass = true,
 }: BlurContainerProps) {
+  // Check if we're in the browser and get the initial theme mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Update isDarkMode based on the document's data-theme attribute or prefers-color-scheme
+    const isDark = document.documentElement.classList.contains('dark');
+    setIsDarkMode(isDark);
+
+    // Optional: Set up listener for theme changes if your app supports switching themes
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.attributeName === 'class') {
+          setIsDarkMode(document.documentElement.classList.contains('dark'));
+        }
+      }
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
       className={cn(
@@ -31,7 +52,9 @@ export function BlurContainer({
         backdropFilter: `blur(${blurAmount}px)`,
         WebkitBackdropFilter: `blur(${blurAmount}px)`,
         backgroundColor: isGlass
-          ? `rgba(255, 255, 255, ${bgOpacity})`
+          ? isDarkMode
+            ? `rgba(30, 30, 35, ${bgOpacity})`
+            : `rgba(255, 255, 255, ${bgOpacity})`
           : undefined,
         borderRadius,
       }}
@@ -49,8 +72,8 @@ export function CardBlur({
   return (
     <BlurContainer
       className={cn("p-4", className)}
-      blurAmount={2}
-      bgOpacity={0.5}
+      blurAmount={10}
+      bgOpacity={0.8}
       borderRadius="1rem"
       isGlass={true}
     >

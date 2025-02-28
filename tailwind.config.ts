@@ -113,6 +113,11 @@ const config: Config = {
 					'0%, 100%': { left: '-100%' },
 					'25%, 75%': { left: '100%' },
 					'50%': { left: '100%' }
+				},
+				'shine-slow': {
+					'0%, 100%': { left: '-100%' },
+					'30%, 70%': { left: '100%' },
+					'50%': { left: '100%' }
 				}
 			},
 			animation: {
@@ -124,7 +129,8 @@ const config: Config = {
 				'slide-down': 'slide-down 0.8s ease-out',
 				'scale-in': 'scale-in 0.8s ease-out',
 				'breathing': 'breathing 2s ease-in-out infinite',
-				'shine': 'shine 8s ease-in-out infinite'
+				'shine': 'shine 8s ease-in-out infinite',
+				'shine-slow': 'shine-slow 15s ease-in-out infinite'
 			},
 		}
 	},

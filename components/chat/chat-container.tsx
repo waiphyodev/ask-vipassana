@@ -169,7 +169,7 @@ export function ChatContainer() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto scrollbar-thin">
+      <div className="flex-1 overflow-y-auto scrollbar-hide">
         <div className="px-4 pt-4 pb-32 space-y-4">
           {/* Welcome message for first-time visitors */}
           {isFirstVisit && messages.length === 0 && (
