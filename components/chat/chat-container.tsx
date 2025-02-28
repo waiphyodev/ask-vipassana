@@ -6,6 +6,9 @@ import { ChatMessage } from "./chat-message"
 import { ChatInput } from "./chat-input"
 import { SlideUp, Breathing } from "../ui/animation-wrapper"
 import { FloatingBlur } from "../ui/blur-container"
+import { WelcomeMessage } from "./welcome-message"
+import { SuggestedQuestions } from "./suggested-questions"
+import { TimerButton } from "../meditation/timer-button"
 
 export type Message = {
   id: string
@@ -17,6 +20,7 @@ export type Message = {
 export function ChatContainer() {
   const [messages, setMessages] = useState<Message[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [isFirstVisit, setIsFirstVisit] = useState(false)
 
   useEffect(() => {
     // Load chat history from localStorage
@@ -24,6 +28,29 @@ export function ChatContainer() {
     if (savedHistory) {
       setMessages(JSON.parse(savedHistory))
     }
+
+    // Check if this is the first visit
+    const hasVisitedBefore = localStorage.getItem("vipassana-visited-before")
+    if (!hasVisitedBefore) {
+      setIsFirstVisit(true)
+      localStorage.setItem("vipassana-visited-before", "true")
+    }
+
+    // Check for inactive period (7 days) and clear if needed
+    const lastActivity = localStorage.getItem("vipassana-last-activity")
+    if (lastActivity) {
+      const lastActiveTime = parseInt(lastActivity, 10)
+      const currentTime = Date.now()
+      const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000
+
+      if (currentTime - lastActiveTime > sevenDaysInMs) {
+        // Clear history after 7 days of inactivity
+        clearHistory()
+      }
+    }
+
+    // Update last activity timestamp
+    localStorage.setItem("vipassana-last-activity", Date.now().toString())
   }, [])
 
   const saveMessages = (newMessages: Message[]) => {
@@ -49,7 +76,7 @@ export function ChatContainer() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: content, history: messages }),
+        body: JSON.stringify({ chatInput: content, history: messages }),
       })
 
       if (!response.ok) throw new Error("Failed to get response")
@@ -83,8 +110,18 @@ export function ChatContainer() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-8rem)] flex-col space-y-4">
+    <div className="flex h-[calc(100vh-8rem)] flex-col space-y-4 relative">
       <div className="flex-1 space-y-4 overflow-y-auto p-4">
+        {/* Welcome message for first-time visitors */}
+        {isFirstVisit && messages.length === 0 && (
+          <WelcomeMessage />
+        )}
+
+        {/* Suggested questions for first-time visitors */}
+        {isFirstVisit && messages.length === 0 && (
+          <SuggestedQuestions onSelectQuestion={handleSendMessage} />
+        )}
+
         <AnimatePresence initial={false}>
           {messages.map((message, index) => (
             <SlideUp
@@ -97,6 +134,7 @@ export function ChatContainer() {
             </SlideUp>
           ))}
         </AnimatePresence>
+
         {isLoading && (
           <Breathing className="flex items-center space-x-2 text-sm text-muted-foreground">
             <div className="h-2 w-2 rounded-full bg-muted-foreground" />
@@ -105,6 +143,7 @@ export function ChatContainer() {
           </Breathing>
         )}
       </div>
+
       <FloatingBlur className="p-4 mx-auto w-full max-w-3xl">
         <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
         {messages.length > 0 && (
@@ -116,6 +155,9 @@ export function ChatContainer() {
           </button>
         )}
       </FloatingBlur>
+
+      {/* Meditation Timer Button */}
+      <TimerButton />
     </div>
   )
 }
