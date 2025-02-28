@@ -1,10 +1,10 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { motion } from "framer-motion"
+import Image from "next/image"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { SendIcon } from "lucide-react"
+import { FadeIn } from "@/components/ui/animation-wrapper"
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void
@@ -39,30 +39,37 @@ export function ChatInput({ onSendMessage, isLoading }: ChatInputProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="relative">
-      <Textarea
-        ref={textareaRef}
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="Ask a question about Vipassana meditation..."
-        className="min-h-[60px] w-full resize-none pr-16"
-        disabled={isLoading}
-      />
-      <motion.div
-        className="absolute bottom-3 right-3"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <Button
-          type="submit"
-          size="icon"
-          disabled={!message.trim() || isLoading}
-        >
-          <SendIcon className="size-4" />
-          <span className="sr-only">Send message</span>
-        </Button>
-      </motion.div>
-    </form>
+    <FadeIn duration={0.5}>
+      <form onSubmit={handleSubmit} className="relative">
+        <Textarea
+          ref={textareaRef}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Ask a question about Vipassana meditation..."
+          className="min-h-[60px] w-full resize-none pr-16 rounded-2xl border-muted/30 focus:border-muted/50 transition-all duration-300"
+          disabled={isLoading}
+        />
+        <div className="absolute bottom-3 right-3">
+          <Button
+            type="submit"
+            size="icon"
+            disabled={!message.trim() || isLoading}
+            className="rounded-full transition-all duration-500 hover:scale-105 active:scale-95 overflow-hidden p-0"
+          >
+            <div className="flex items-center justify-center h-full w-full bg-primary">
+              <Image
+                src="/logo.webp"
+                alt="Send"
+                width={24}
+                height={24}
+                className="object-cover"
+              />
+            </div>
+            <span className="sr-only">Send message</span>
+          </Button>
+        </div>
+      </form>
+    </FadeIn>
   )
 }

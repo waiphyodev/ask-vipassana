@@ -1,9 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { AnimatePresence } from "framer-motion"
 import { ChatMessage } from "./chat-message"
 import { ChatInput } from "./chat-input"
+import { SlideUp, Breathing } from "../ui/animation-wrapper"
+import { FloatingBlur } from "../ui/blur-container"
 
 export type Message = {
   id: string
@@ -84,41 +86,36 @@ export function ChatContainer() {
     <div className="flex h-[calc(100vh-8rem)] flex-col space-y-4">
       <div className="flex-1 space-y-4 overflow-y-auto p-4">
         <AnimatePresence initial={false}>
-          {messages.map((message) => (
-            <motion.div
+          {messages.map((message, index) => (
+            <SlideUp
               key={message.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
+              delay={index * 0.1}
+              duration={0.8}
+              className="w-full"
             >
               <ChatMessage message={message} />
-            </motion.div>
+            </SlideUp>
           ))}
         </AnimatePresence>
         {isLoading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex items-center space-x-2 text-sm text-muted-foreground"
-          >
-            <div className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground" />
-            <div className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground delay-150" />
-            <div className="h-2 w-2 animate-pulse rounded-full bg-muted-foreground delay-300" />
-          </motion.div>
+          <Breathing className="flex items-center space-x-2 text-sm text-muted-foreground">
+            <div className="h-2 w-2 rounded-full bg-muted-foreground" />
+            <div className="h-2 w-2 rounded-full bg-muted-foreground" />
+            <div className="h-2 w-2 rounded-full bg-muted-foreground" />
+          </Breathing>
         )}
       </div>
-      <div className="p-4">
+      <FloatingBlur className="p-4 mx-auto w-full max-w-3xl">
         <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
         {messages.length > 0 && (
           <button
             onClick={clearHistory}
-            className="mt-2 text-xs text-muted-foreground hover:text-foreground"
+            className="mt-2 text-xs text-muted-foreground hover:text-foreground transition-colors duration-300"
           >
             Clear Conversation
           </button>
         )}
-      </div>
+      </FloatingBlur>
     </div>
   )
 }

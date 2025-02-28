@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import { ThemeProvider } from '@/components/theme-provider'
+import { ThemeProvider } from '../components/theme-provider'
+import { ResponsiveBackground } from '../components/ui/responsive-background'
 import './globals.css'
 
 const geistSans = localFont({
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   title: 'Ask Vipassana - Meditation Guidance',
   description: 'Access authentic Vipassana Buddhist wisdom through mindful conversation',
   icons: {
-    icon: '/icon.png',
+    icon: '/logo.webp',
   },
 }
 
@@ -36,7 +37,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ResponsiveBackground
+            overlayOpacity={0.7}
+            enableParallax={true}
+            blurAmount={0}
+            backgroundColor="#cf986e"
+          >
+            {children}
+          </ResponsiveBackground>
         </ThemeProvider>
       </body>
     </html>
