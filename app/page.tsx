@@ -32,12 +32,23 @@ export default function Home() {
 
         <FadeIn delay={0.6} duration={1.5}>
           <p className="max-w-[600px] mx-auto text-muted-foreground text-lg leading-relaxed tracking-wide">
-            A space for mindful conversation and authentic Vipassana Buddhist wisdom.
-            Begin your journey with a calm and open mind.
+            Your practical guide for authentic Vipassana wisdom.
           </p>
         </FadeIn>
 
-        <FadeIn delay={0.9} duration={1.5}>
+        <FadeIn delay={0.8} duration={1.5}>
+          <p className="max-w-[600px] mx-auto text-muted-foreground text-lg leading-relaxed tracking-wide">
+            Ask questions, receive clear meditation instructions, and discover daily applications of profound Dhamma teachings—accessible, direct, and completely free from commercialization.
+          </p>
+        </FadeIn>
+
+        <FadeIn delay={1.0} duration={1.5}>
+          <p className="max-w-[600px] mx-auto text-muted-foreground text-lg leading-relaxed tracking-wide">
+            Clear your mind. Take your first step.
+          </p>
+        </FadeIn>
+
+        <FadeIn delay={1.2} duration={1.5}>
           <FloatingBlur className="inline-block mt-6">
             <Link
               href="/chat"
