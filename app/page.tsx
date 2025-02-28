@@ -31,7 +31,7 @@ export default function Home() {
         </FadeIn>
 
         <FadeIn delay={0.6} duration={1.5}>
-          <p className="max-w-[600px] text-muted-foreground text-lg leading-relaxed tracking-wide">
+          <p className="max-w-[600px] mx-auto text-muted-foreground text-lg leading-relaxed tracking-wide">
             A space for mindful conversation and authentic Vipassana Buddhist wisdom.
             Begin your journey with a calm and open mind.
           </p>

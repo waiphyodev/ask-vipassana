@@ -2,24 +2,36 @@
 
 import { cn } from "@/lib/utils"
 import Image from "next/image"
-import type { Message } from "./chat-container"
+import { Trash2, RefreshCw } from "lucide-react"
 import { CardBlur } from "../ui/blur-container"
 import { FadeIn } from "../ui/animation-wrapper"
+import { getInteractiveEffectClasses, getDeleteButtonEffectClasses, getRefreshButtonEffectClasses } from "@/utils/visual-effects"
+
+// Define the Message type locally to avoid circular dependencies
+type Message = {
+  id: string
+  role: "user" | "assistant"
+  content: string
+  timestamp: number
+}
 
 interface ChatMessageProps {
   message: Message
+  onDelete: (id: string) => void
+  onRefresh?: (id: string) => void
 }
 
-export function ChatMessage({ message }: ChatMessageProps) {
+export function ChatMessage({ message, onDelete, onRefresh }: ChatMessageProps) {
   const isAssistant = message.role === "assistant"
 
   return (
     <CardBlur
       className={cn(
-        "flex w-full items-start gap-4 rounded-lg p-4 mb-4 transition-all duration-500",
+        "flex w-full items-start gap-4 rounded-lg p-4 mb-4 transition-all duration-500 group",
         isAssistant
           ? "bg-muted/30 border border-muted/20"
-          : "bg-background/70"
+          : "bg-background/70",
+        getInteractiveEffectClasses()
       )}
     >
       <div className={cn(
@@ -44,9 +56,29 @@ export function ChatMessage({ message }: ChatMessageProps) {
             {message.content}
           </p>
         </FadeIn>
-        <p className="text-xs text-muted-foreground opacity-70">
-          {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-xs text-muted-foreground opacity-70">
+            {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </p>
+          <div className="flex space-x-2">
+            {!isAssistant && onRefresh && (
+              <button
+                onClick={() => onRefresh(message.id)}
+                className={getRefreshButtonEffectClasses()}
+                aria-label="Refresh conversation from this message"
+              >
+                <RefreshCw size={16} />
+              </button>
+            )}
+            <button
+              onClick={() => onDelete(message.id)}
+              className={getDeleteButtonEffectClasses()}
+              aria-label="Delete message"
+            >
+              <Trash2 size={16} />
+            </button>
+          </div>
+        </div>
       </div>
     </CardBlur>
   )

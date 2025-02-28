@@ -117,6 +117,36 @@ This document chronicles key architectural decisions made during the development
   - Check on application load for inactivity period
   - Manual clearing option still available for immediate control
 
+## 10. Message Management Implementation
+- **Date**: 28/02/2025
+- **Context**: Need for more control over conversation history
+- **Decision**: Implemented message deletion and conversation refresh functionality
+- **Rationale**:
+  - Gives users more control over their conversation
+  - Allows for correcting or removing unwanted messages
+  - Enables restarting conversation from a specific point
+  - Enhances user experience with more interactive options
+- **Implications**:
+  - Added delete functionality for both user and assistant messages
+  - Added refresh functionality for user messages
+  - Updated UI to show these controls on hover
+  - Enhanced state management to handle message operations
+
+## 11. Visual Effects System
+- **Date**: 28/02/2025
+- **Context**: Need for enhanced interactive elements
+- **Decision**: Created a visual effects utility with configurable intensity
+- **Rationale**:
+  - Provides consistent visual feedback across interactive elements
+  - Enhances user experience with subtle animations
+  - Configurable intensity allows for future user preferences
+  - Centralizes effect definitions for easier maintenance
+- **Implications**:
+  - Created utility functions for hover and click effects
+  - Applied effects to buttons and interactive elements
+  - Implemented intensity control for future user customization
+  - Enhanced UI responsiveness with visual feedback
+
 ## Pending Decisions
 
 ### Source Reference System

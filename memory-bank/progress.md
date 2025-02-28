@@ -17,6 +17,9 @@
 - [x] Suggested questions for new users
 - [x] Meditation timer with breathing animations
 - [x] Automatic conversation clearing after inactivity period
+- [x] Message deletion functionality (for both user and assistant messages)
+- [x] Conversation refresh from specific user message
+- [x] Enhanced visual effects for interactive elements
 
 ### Backend Integration
 - [x] API route for chat functionality
@@ -31,6 +34,13 @@
 - [x] Responsive background implementation
 - [x] Meditation timer with progress indicator
 - [x] Floating timer button
+- [x] Interactive message controls (delete and refresh)
+- [x] Visual feedback for interactive elements
+
+### UI Improvements
+- [x] Fixed text centering on home screen
+- [x] Removed double background from buttons
+- [x] Added visual effects to interactive elements
 
 ## In Progress Features
 - [ ] Source reference system for citing original texts
@@ -55,8 +65,9 @@
 ### Phase 2: Enhanced User Experience 🔄
 - [x] First-time user guidance
 - [x] Meditation timer
+- [x] Message management (delete, refresh)
+- [x] UI refinements and visual effects
 - [ ] Source references
-- [ ] UI refinements
 
 ### Phase 3: Advanced Features ⏳
 - [ ] User customization options

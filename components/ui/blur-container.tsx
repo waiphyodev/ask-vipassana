@@ -84,7 +84,7 @@ export function FloatingBlur({
     <BlurContainer
       className={cn("p-3 shadow-lg", className)}
       blurAmount={5}
-      bgOpacity={0.6}
+      bgOpacity={0}
       borderRadius="0.75rem"
       isGlass={true}
     >

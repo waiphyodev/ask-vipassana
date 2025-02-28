@@ -9,6 +9,7 @@ import { FloatingBlur } from "../ui/blur-container"
 import { WelcomeMessage } from "./welcome-message"
 import { SuggestedQuestions } from "./suggested-questions"
 import { TimerButton } from "../meditation/timer-button"
+import { getInteractiveEffectClasses } from "@/utils/visual-effects"
 
 export type Message = {
   id: string
@@ -104,6 +105,60 @@ export function ChatContainer() {
     }
   }
 
+  const handleDeleteMessage = (id: string) => {
+    const updatedMessages = messages.filter(message => message.id !== id)
+    saveMessages(updatedMessages)
+  }
+
+  const handleRefreshFromMessage = async (id: string) => {
+    // Find the index of the message to refresh from
+    const messageIndex = messages.findIndex(message => message.id === id)
+    if (messageIndex === -1) return
+
+    // Get the message content
+    const messageToRefresh = messages[messageIndex]
+    if (messageToRefresh.role !== "user") return
+
+    // Keep only messages up to the selected message
+    const updatedMessages = messages.slice(0, messageIndex + 1)
+    saveMessages(updatedMessages)
+    setIsLoading(true)
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chatInput: messageToRefresh.content,
+          history: messages.slice(0, messageIndex)
+        }),
+      })
+
+      if (!response.ok) throw new Error("Failed to get response")
+
+      const data = await response.json()
+      const assistantMessage: Message = {
+        id: Date.now().toString(),
+        role: "assistant",
+        content: data.message,
+        timestamp: Date.now(),
+      }
+
+      saveMessages([...updatedMessages, assistantMessage])
+    } catch (error) {
+      console.error("Error:", error)
+      const errorMessage: Message = {
+        id: Date.now().toString(),
+        role: "assistant",
+        content: "I apologize, but I'm having trouble responding right now. Please try again in a moment.",
+        timestamp: Date.now(),
+      }
+      saveMessages([...updatedMessages, errorMessage])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const clearHistory = () => {
     setMessages([])
     localStorage.removeItem("vipassana-chat-history")
@@ -130,7 +185,11 @@ export function ChatContainer() {
               duration={0.8}
               className="w-full"
             >
-              <ChatMessage message={message} />
+              <ChatMessage
+                message={message}
+                onDelete={handleDeleteMessage}
+                onRefresh={message.role === "user" ? handleRefreshFromMessage : undefined}
+              />
             </SlideUp>
           ))}
         </AnimatePresence>
@@ -149,7 +208,7 @@ export function ChatContainer() {
         {messages.length > 0 && (
           <button
             onClick={clearHistory}
-            className="mt-2 text-xs text-muted-foreground hover:text-foreground transition-colors duration-300"
+            className={getInteractiveEffectClasses("mt-2 text-xs text-muted-foreground hover:text-foreground")}
           >
             Clear Conversation
           </button>
