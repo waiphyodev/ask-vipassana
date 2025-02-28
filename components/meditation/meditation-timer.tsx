@@ -2,21 +2,64 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
 import { Breathing, FadeIn } from "@/components/ui/animation-wrapper"
-import { ModalBlur } from "@/components/ui/blur-container"
-import { Play, Pause, RotateCcw, X } from "lucide-react"
+import { Play, Pause, RotateCcw, X, Bell } from "lucide-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogClose
+} from "@/components/ui/dialog"
 
 interface MeditationTimerProps {
-  onClose: () => void
+  open: boolean
+  onOpenChange: (open: boolean) => void
 }
 
-export function MeditationTimer({ onClose }: MeditationTimerProps) {
+export function MeditationTimer({ open, onOpenChange }: MeditationTimerProps) {
   const [duration, setDuration] = useState(10) // Default 10 minutes
   const [timeLeft, setTimeLeft] = useState(duration * 60)
   const [isActive, setIsActive] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
+  const [soundEnabled, setSoundEnabled] = useState(true)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const audioContextRef = useRef<AudioContext | null>(null)
+
+  // Create a function to play meditation bell sound
+  const playCompletionSound = () => {
+    if (!soundEnabled) return;
+
+    try {
+      // Create AudioContext if not already created
+      if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+      }
+
+      const ctx = audioContextRef.current;
+      const oscillator = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+
+      // Configure a bell-like sound
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(440, ctx.currentTime); // A4 note
+
+      // Envelope for the bell sound
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 0.1);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2);
+
+      // Connect and start
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      oscillator.start(ctx.currentTime);
+      oscillator.stop(ctx.currentTime + 2);
+    } catch (error) {
+      console.error("Error playing completion sound:", error);
+    }
+  }
 
   // Format time as MM:SS
   const formatTime = (seconds: number): string => {
@@ -67,6 +110,7 @@ export function MeditationTimer({ onClose }: MeditationTimerProps) {
             clearInterval(intervalRef.current as NodeJS.Timeout)
             setIsActive(false)
             setIsCompleted(true)
+            playCompletionSound()
             return 0
           }
           return prevTime - 1
@@ -83,6 +127,12 @@ export function MeditationTimer({ onClose }: MeditationTimerProps) {
     }
   }, [isActive, isPaused, isCompleted])
 
+  // Toggle sound
+  const toggleSound = () => {
+    setSoundEnabled(prev => !prev);
+    localStorage.setItem("vipassana-timer-sound-enabled", (!soundEnabled).toString());
+  }
+
   // Save timer preferences to localStorage
   useEffect(() => {
     localStorage.setItem("vipassana-timer-duration", duration.toString())
@@ -98,6 +148,12 @@ export function MeditationTimer({ onClose }: MeditationTimerProps) {
         setTimeLeft(parsedDuration * 60)
       }
     }
+
+    // Load sound preference
+    const savedSoundEnabled = localStorage.getItem("vipassana-timer-sound-enabled")
+    if (savedSoundEnabled !== null) {
+      setSoundEnabled(savedSoundEnabled === "true")
+    }
   }, [])
 
   // Calculate progress percentage
@@ -106,20 +162,18 @@ export function MeditationTimer({ onClose }: MeditationTimerProps) {
     : 0
 
   return (
-    <FadeIn duration={0.5}>
-      <ModalBlur className="relative max-w-md mx-auto">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-2 right-2 rounded-full"
-          onClick={onClose}
-        >
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-md mx-auto bg-background/95 backdrop-blur-md">
+        <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none">
           <X className="h-4 w-4" />
-        </Button>
+          <span className="sr-only">Close</span>
+        </DialogClose>
+
+        <DialogHeader>
+          <DialogTitle className="text-lg font-medium text-center">Meditation Timer</DialogTitle>
+        </DialogHeader>
 
         <div className="text-center py-2">
-          <h3 className="text-lg font-medium mb-6">Meditation Timer</h3>
-
           {/* Timer Display */}
           <div className="relative mb-8 flex justify-center">
             <Breathing
@@ -160,6 +214,17 @@ export function MeditationTimer({ onClose }: MeditationTimerProps) {
                 transform="rotate(-90 64 64)"
               />
             </svg>
+          </div>
+
+          {/* Sound Toggle */}
+          <div className="flex items-center justify-center mb-4 text-sm">
+            <Bell className="h-4 w-4 mr-2" />
+            <span className="mr-2">Sound</span>
+            <Switch
+              checked={soundEnabled}
+              onCheckedChange={toggleSound}
+              aria-label="Toggle timer sound"
+            />
           </div>
 
           {/* Duration Selection */}
@@ -223,7 +288,7 @@ export function MeditationTimer({ onClose }: MeditationTimerProps) {
             Find a comfortable position, close your eyes, and focus on your breath.
           </p>
         </div>
-      </ModalBlur>
-    </FadeIn>
+      </DialogContent>
+    </Dialog>
   )
 }

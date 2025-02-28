@@ -2,13 +2,16 @@
 
 import { useState, useEffect } from "react"
 import { AnimatePresence } from "framer-motion"
+import { Bell } from "lucide-react"
 import { ChatMessage } from "./chat-message"
 import { ChatInput } from "./chat-input"
 import { SlideUp, Breathing } from "../ui/animation-wrapper"
 import { FloatingBlur } from "../ui/blur-container"
 import { WelcomeMessage } from "./welcome-message"
 import { SuggestedQuestions } from "./suggested-questions"
-import { TimerButton } from "../meditation/timer-button"
+import { MeditationTimer } from "../meditation/meditation-timer"
+import { ThemeToggle } from "../ui/theme-toggle"
+import { Button } from "../ui/button"
 import { getInteractiveEffectClasses } from "@/utils/visual-effects"
 
 export type Message = {
@@ -22,6 +25,7 @@ export function ChatContainer() {
   const [messages, setMessages] = useState<Message[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [isFirstVisit, setIsFirstVisit] = useState(false)
+  const [isTimerOpen, setIsTimerOpen] = useState(false)
 
   useEffect(() => {
     // Load chat history from localStorage
@@ -165,8 +169,13 @@ export function ChatContainer() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-8rem)] flex-col space-y-4 relative">
-      <div className="flex-1 space-y-4 overflow-y-auto p-4">
+    <div className="flex h-screen flex-col space-y-4 relative">
+      {/* Theme Toggle Button - positioned at the top right */}
+      <div className="absolute top-4 right-4 z-10">
+        <ThemeToggle />
+      </div>
+
+      <div className="flex-1 space-y-4 overflow-y-auto scrollbar-thin p-4 pb-20 relative">
         {/* Welcome message for first-time visitors */}
         {isFirstVisit && messages.length === 0 && (
           <WelcomeMessage />
@@ -204,19 +213,32 @@ export function ChatContainer() {
       </div>
 
       <FloatingBlur className="p-4 mx-auto w-full max-w-3xl">
-        <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
-        {messages.length > 0 && (
-          <button
-            onClick={clearHistory}
-            className={getInteractiveEffectClasses("mt-2 text-xs text-muted-foreground hover:text-foreground")}
-          >
-            Clear Conversation
-          </button>
-        )}
+        <div className="relative">
+          <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
+          {messages.length > 0 && (
+            <div className="flex justify-between items-center mt-2 gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center text-xs text-muted-foreground hover:text-foreground"
+                onClick={() => setIsTimerOpen(true)}
+              >
+                <Bell className="h-3 w-3 mr-1" />
+                Meditation Timer
+              </Button>
+              <button
+                onClick={clearHistory}
+                className={getInteractiveEffectClasses("text-xs text-muted-foreground hover:text-foreground")}
+              >
+                Clear Conversation
+              </button>
+            </div>
+          )}
+        </div>
       </FloatingBlur>
 
-      {/* Meditation Timer Button */}
-      <TimerButton />
+      {/* Meditation Timer */}
+      <MeditationTimer open={isTimerOpen} onOpenChange={setIsTimerOpen} />
     </div>
   )
 }

@@ -1,11 +1,16 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-import Image from "next/image"
 import { Trash2, RefreshCw } from "lucide-react"
 import { CardBlur } from "../ui/blur-container"
 import { FadeIn } from "../ui/animation-wrapper"
-import { getInteractiveEffectClasses, getDeleteButtonEffectClasses, getRefreshButtonEffectClasses } from "@/utils/visual-effects"
+import {
+  getInteractiveEffectClasses,
+  getDeleteButtonEffectClasses,
+  getRefreshButtonEffectClasses,
+  getGlowEffectClasses,
+  getShineAnimationClasses
+} from "@/utils/visual-effects"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 
@@ -31,29 +36,15 @@ export function ChatMessage({ message, onDelete, onRefresh }: ChatMessageProps) 
   return (
     <CardBlur
       className={cn(
-        "flex w-full items-start gap-4 rounded-lg p-4 mb-4 transition-all duration-500 group",
+        "w-full mb-4 transition-all duration-500 group max-w-[85%]",
         isAssistant
-          ? "bg-muted/30 border border-muted/20"
-          : "bg-background/70",
-        getInteractiveEffectClasses()
+          ? "bg-muted/30 border border-muted/20 rounded-lg rounded-bl-sm p-4 ml-0 mr-auto"
+          : "bg-primary/10 border border-primary/10 rounded-lg rounded-br-sm p-4 ml-auto mr-0",
+        getInteractiveEffectClasses(),
+        getGlowEffectClasses("", !isAssistant),
+        getShineAnimationClasses()
       )}
     >
-      <div className={cn(
-        "flex size-8 shrink-0 select-none items-center justify-center rounded-full border shadow-md overflow-hidden",
-        isAssistant ? "bg-transparent" : "bg-background/80"
-      )}>
-        {isAssistant ? (
-          <Image
-            src="/logo.webp"
-            alt="Vipassana Assistant"
-            width={32}
-            height={32}
-            className="object-cover"
-          />
-        ) : (
-          <span className="text-sm font-semibold">U</span>
-        )}
-      </div>
       <div className="flex-1 space-y-3">
         <FadeIn duration={1}>
           <div className="prose prose-sm dark:prose-invert prose-p:leading-relaxed prose-p:tracking-wide prose-p:my-2 prose-headings:mb-2 prose-headings:mt-4 prose-pre:bg-muted/50 prose-pre:border prose-pre:border-muted/20 prose-pre:rounded-md max-w-none">

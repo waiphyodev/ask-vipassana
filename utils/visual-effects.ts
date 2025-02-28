@@ -16,6 +16,47 @@ export const getEffectIntensity = (): number => {
   return effectIntensity;
 };
 
+// Get glow effect classes for message bubbles
+export const getGlowEffectClasses = (baseClasses: string = "", isUser = false): string => {
+  const userGlowColor = "rgba(var(--primary-rgb), 0.15)";
+  const assistantGlowColor = "rgba(255, 255, 255, 0.1)";
+
+  if (effectIntensity < 0.3) {
+    // Subtle effects
+    return baseClasses;
+  } else if (effectIntensity < 0.7) {
+    // Medium effects
+    return cn(
+      baseClasses,
+      isUser
+        ? `shadow-[0_0_15px_1px_${userGlowColor}]`
+        : `shadow-[0_0_15px_1px_${assistantGlowColor}]`
+    );
+  } else {
+    // Strong effects
+    return cn(
+      baseClasses,
+      isUser
+        ? `shadow-[0_0_20px_2px_${userGlowColor}]`
+        : `shadow-[0_0_20px_2px_${assistantGlowColor}]`
+    );
+  }
+};
+
+// Get shine animation classes
+export const getShineAnimationClasses = (baseClasses: string = ""): string => {
+  if (effectIntensity < 0.3) {
+    // No shine for subtle effects
+    return baseClasses;
+  } else {
+    return cn(
+      baseClasses,
+      "relative overflow-hidden",
+      "after:absolute after:content-[''] after:w-[200%] after:h-[200%] after:bg-gradient-to-r after:from-transparent after:via-white/10 after:to-transparent after:-left-full after:top-0 after:transform after:-rotate-45 after:animate-shine after:z-0"
+    );
+  }
+};
+
 // Apply hover effect classes based on current intensity
 export const getHoverEffectClasses = (baseClasses: string = ""): string => {
   if (effectIntensity < 0.3) {

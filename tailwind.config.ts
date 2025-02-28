@@ -108,6 +108,11 @@ const config: Config = {
 				'breathing': {
 					'0%, 100%': { transform: 'scale(1)', opacity: '0.9' },
 					'50%': { transform: 'scale(1.05)', opacity: '1' }
+				},
+				'shine': {
+					'0%, 100%': { left: '-100%' },
+					'25%, 75%': { left: '100%' },
+					'50%': { left: '100%' }
 				}
 			},
 			animation: {
@@ -118,7 +123,8 @@ const config: Config = {
 				'slide-up': 'slide-up 0.8s ease-out',
 				'slide-down': 'slide-down 0.8s ease-out',
 				'scale-in': 'scale-in 0.8s ease-out',
-				'breathing': 'breathing 2s ease-in-out infinite'
+				'breathing': 'breathing 2s ease-in-out infinite',
+				'shine': 'shine 8s ease-in-out infinite'
 			},
 		}
 	},

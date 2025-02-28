@@ -30,7 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background`}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+        <script defer data-domain="askvipassana.com" src="https://plausible.z3n.sh/js/script.js"></script>
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background no-page-scroll`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

@@ -1,162 +1,115 @@
-# Development Plan: Ask Vipassana
+# UI Enhancements Implementation Plan
 
-## Current Status
-The Ask Vipassana application currently has a solid foundation with:
-- Minimalist landing page with appropriate animations
-- Basic chat interface with message input and display
-- Backend API integration with N8N webhook
-- Local storage for chat history
-- Responsive design with blur effects and animations
+## Overview
+This document outlines the implementation plan for the requested UI enhancements to improve the Ask Vipassana application's user experience. The changes include removing scrollbars, implementing theme toggling, styling message bubbles, adding animations, and refining the meditation timer functionality.
 
-## Next Development Priorities
+## Required Changes
 
-### 1. First-Time User Guidance Implementation
-**Priority: High**
+### 1. Clean Interface with Modified Scrolling
+- **Current Implementation**: Main container and chat history both have scroll capability, with default browser scrollbars visible.
+- **Target Implementation**:
+  - Hide scrollbars or make them minimal and unobtrusive
+  - Disable scrolling on the main container
+  - Allow scrolling only within the chat history area
+  - Maintain proper layout responsiveness
+- **Files to Modify**:
+  - `app/globals.css`: Add custom scrollbar styling
+  - `app/layout.tsx`: Add overflow handling at root level
+  - `components/chat/chat-container.tsx`: Modify container scrolling behavior
 
-The application needs to provide gentle guidance for first-time users to help them understand how to use the interface and what types of questions to ask.
+### 2. Theme Switch Toggle
+- **Current Implementation**: Uses next-themes for theme management but has no UI toggle component.
+- **Target Implementation**:
+  - Create a visually appealing theme toggle (light/dark) button
+  - Position toggle in an accessible location
+  - Add smooth transition animations between themes
+- **Files to Modify/Create**:
+  - Create: `components/ui/theme-toggle.tsx`
+  - Update: `components/chat/chat-container.tsx` to include the toggle
 
-#### Technical Approach
-- Add suggested starter questions for first-time users
-- Implement a welcoming message system that appears for new users
-- Create subtle UI hints that guide users through their first interaction
-- Store a "first visit" flag in localStorage to differentiate returning users
+### 3. Message Styling Updates
+- **Current Implementation**: Uses avatar icons for both user and assistant messages with moderate styling differences.
+- **Target Implementation**:
+  - Remove avatar icons completely
+  - Create more distinct styling for user vs assistant messages
+  - Use different background colors, shapes, or borders based on role
+- **Files to Modify**:
+  - `components/chat/chat-message.tsx`: Remove avatar section and enhance role-based styling
 
-#### Design Considerations
-- Messages should be warm, inviting, and teacher-like in tone
-- Guidance should appear naturally, not intrusively
-- Suggestions should reflect common Vipassana meditation questions
+### 4. Visual Animation Enhancements
+- **Current Implementation**: Has basic interactive animations but no glow or shine effects.
+- **Target Implementation**:
+  - Add subtle glow effect to message bubbles
+  - Implement shine animations for visual polish
+  - Ensure animations are subtle and enhance the meditative experience
+- **Files to Modify**:
+  - `utils/visual-effects.ts`: Add new animation effect functions
+  - `components/chat/chat-message.tsx`: Apply the new animations
 
-### 2. Meditation Timer Integration
-**Priority: High**
+### 5. Meditation Timer Modifications
+- **Current Implementation**:
+  - Floating button to access timer
+  - Modal dialog for timer functionality
+  - No sound feedback
+  - "Clear Conversation" button below input field
+- **Target Implementation**:
+  - Add sound notification when timer completes
+  - Remove dedicated timer button
+  - Integrate timer access through another UI element
+  - Reposition "Clear Conversation" button to right side below text input
+- **Files to Modify**:
+  - `components/meditation/meditation-timer.tsx`: Add sound capability
+  - `components/meditation/timer-button.tsx`: Remove or repurpose
+  - `components/chat/chat-container.tsx`: Reposition buttons and integrate timer differently
 
-The meditation timer is one of the core features mentioned in the project brief but is not yet implemented. This feature will enhance the user experience by allowing users to time their meditation sessions within the application.
+## Implementation Approach
 
-#### Technical Approach
-- Create a new `MeditationTimer` component
-- Implement timer controls (start, pause, reset)
-- Add gentle audio cues for session start/end
-- Integrate timer UI with the chat interface as a floating element
-- Store timer preferences in localStorage
+1. **First Phase**: Implement scrollbar and container modifications
+   - This establishes the cleaner interface foundation
 
-#### Design Considerations
-- Timer should be subtle and non-distracting
-- Animations should be calming and mindful (breathing effect)
-- Consider using gentle breathing animations to visualize time passing
-- Integrate as a floating button within the chat interface as specified in docs
+2. **Second Phase**: Add theme toggle and message styling updates
+   - These visual changes can be implemented together
 
-### 3. Source Reference System
-**Priority: Medium**
+3. **Third Phase**: Add animation enhancements
+   - Build on the new styling with subtle animations
 
-The source reference system will add credibility to the AI responses by citing original Buddhist texts when relevant.
+4. **Final Phase**: Meditation timer modifications
+   - Update the timer with sound and reposition UI elements
 
-#### Technical Approach
-- Modify the `ChatMessage` component to support citation display
-- Update API response handling to process citation metadata
-- Implement a subtle visual design for citations
-- Consider expandable/collapsible citation details
+## Technical Considerations
 
-#### Design Considerations
-- Citations should be unobtrusive yet accessible
-- Consider hover or click interactions for detailed citation information
-- Maintain the minimalist aesthetic while adding this feature
+1. **Animation Performance**: Ensure animations are hardware-accelerated and don't impact performance
+2. **Sound Implementation**: Use the Web Audio API for timer sound feedback
+3. **Responsive Design**: Maintain proper responsiveness on all device sizes
+4. **Accessibility**: Ensure all UI changes maintain or improve accessibility
+5. **Theme Consistency**: Ensure all new elements respect the light/dark theme settings
 
-### 4. Enhanced Error Handling & Connection States
-**Priority: Medium**
+## Development Tasks Breakdown
 
-Improve user experience when network issues or backend errors occur, ensuring errors are handled gracefully with calming messages.
+1. **Scrolling Modifications**
+   - Hide scrollbars in CSS
+   - Modify container overflow properties
+   - Test scrolling behavior on different devices
 
-#### Technical Approach
-- Add more detailed error states in the chat container
-- Implement retry mechanisms with exponential backoff for failed requests
-- Add visual feedback for connection status
-- Enhance loading animations to resemble breathing
-- Create calming fallback messages like "Let's take a moment to breathe and try again"
+2. **Theme Toggle Implementation**
+   - Create toggle component
+   - Implement theme switching logic
+   - Style for both themes
+   - Position appropriately in layout
 
-#### Design Considerations
-- Error messages should be gentle, reassuring, and non-technical
-- Consider providing suggested actions during error states
-- Maintain the calm aesthetic even during error scenarios
-- Use the error as an opportunity to remind users of mindfulness
+3. **Message Styling**
+   - Remove avatar code
+   - Enhance message container styling
+   - Implement distinct user/assistant styling
 
-### 5. Automatic Conversation Clearing Mechanism
-**Priority: Medium**
+4. **Animation Effects**
+   - Create glow effect utility
+   - Implement shine animation
+   - Apply to message bubbles
+   - Ensure subtlety and performance
 
-Implement the privacy feature to automatically clear conversations after a period of inactivity.
-
-#### Technical Approach
-- Add timestamp tracking for last user interaction
-- Implement a check on application load to compare current time against last activity
-- Clear localStorage data if inactivity exceeds seven days
-- Add a gentle notification when this happens
-
-#### Design Considerations
-- Privacy should be maintained throughout
-- Users should still have manual control to clear history whenever desired
-- The UI should feel fresh and renewed after an automatic clear
-
-### 6. User Preferences
-**Priority: Low**
-
-Allow users to customize certain aspects of their experience.
-
-#### Technical Approach
-- Create a settings panel accessible via subtle icon
-- Implement preferences for font size and contrast
-- Add option to enable/disable certain animations
-- Store preferences in localStorage
-
-#### Design Considerations
-- Settings should be minimal and focused on accessibility
-- Design should follow the same mindful animation principles
-- Consider how settings interact with the meditation experience
-
-### 7. Performance Optimization
-**Priority: Low**
-
-Ensure the application runs smoothly on all devices and browsers.
-
-#### Technical Approach
-- Audit current animation performance
-- Implement lazy loading for non-critical components
-- Optimize localStorage usage
-- Add browser compatibility improvements
-
-## Implementation Phases
-
-### Phase 1: User Experience Enhancements
-- Implement first-time user guidance system
-- Add meditation timer component
-- Integrate source reference display to chat messages
-- Update API handling to accommodate these features
-
-### Phase 2: Privacy & Resilience Improvements
-- Implement enhanced error handling with calming messages
-- Add automatic conversation clearing after inactivity
-- Improve loading states with mindful animations
-- Add exponential backoff for API requests
-
-### Phase 3: Refinement & Customization
-- Add user preferences panel
-- Further refine animations and transitions
-- Implement accessibility improvements
-- Optimize performance across devices
-
-### Phase 4: Testing & Optimization
-- Cross-browser testing
-- Performance optimization
-- Accessibility audit
-- Documentation updates
-
-## Architectural Decisions Needed
-- How the meditation timer should integrate with the chat interface
-- Best approach for displaying source references
-- Strategy for error handling and offline capabilities
-- Method for implementing first-time user guidance that feels natural
-
-## Next Steps
-1. Develop the first-time user guidance system
-2. Implement the meditation timer component
-3. Enhance error handling with mindful messaging
-4. Update the Memory Bank with progress on these features
-
-This plan will guide the continued development of the Ask Vipassana application, focusing on completing the core features outlined in the project brief while maintaining the minimalist, distraction-free design philosophy.
+5. **Timer Modifications**
+   - Implement sound feedback
+   - Remove timer button
+   - Reposition clear button
+   - Test timer functionality
