@@ -23,7 +23,6 @@ export type Message = {
 export function ChatContainer() {
   const [messages, setMessages] = useState<Message[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const [isFirstVisit, setIsFirstVisit] = useState(false)
   const [isTimerOpen, setIsTimerOpen] = useState(false)
 
   useEffect(() => {
@@ -36,7 +35,6 @@ export function ChatContainer() {
     // Check if this is the first visit
     const hasVisitedBefore = localStorage.getItem("vipassana-visited-before")
     if (!hasVisitedBefore) {
-      setIsFirstVisit(true)
       localStorage.setItem("vipassana-visited-before", "true")
     }
 
