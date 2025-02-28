@@ -47,6 +47,7 @@ export default function RootLayout({
             enableParallax={true}
             blurAmount={0}
             backgroundColor="#cf986e"
+            imagePath="/images/background/background-large.webp"
           >
             {children}
           </ResponsiveBackground>

@@ -17,7 +17,7 @@ interface ResponsiveBackgroundProps extends React.HTMLProps<HTMLDivElement> {
 export const ResponsiveBackground = ({
   className,
   children,
-  imagePath = "/background.webp",
+  imagePath = "/images/background/background-large.webp",
   overlayOpacity = 0.7,
   enableParallax = true,
   blurAmount = 0,
@@ -65,9 +65,9 @@ export const ResponsiveBackground = ({
           alt="Background"
           fill
           priority
-          sizes="100vw"
+          sizes="(max-width: 640px) 640px, (max-width: 1280px) 1280px, 1920px"
           className="opacity-100 dark:opacity-50 object-cover md:object-center object-left will-change-transform"
-          quality={90}
+          quality={70}
         />
       </motion.div>
 

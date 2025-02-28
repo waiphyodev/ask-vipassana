@@ -4,6 +4,18 @@ This document tracks key decisions made during the development of the Ask Vipass
 
 ## UI/UX Decisions
 
+### 2025-02-28: Background Image Optimization
+
+1. **Reduce Background Image File Size**
+   - **Decision**: Optimize the background.webp image to reduce its size from 800KB to below 200KB
+   - **Rationale**: Improves page load performance, reduces bandwidth usage, and enhances user experience particularly on mobile devices
+   - **Implementation Strategy**:
+     - Compress the image with more optimal quality settings (60-75% quality)
+     - Resize image to appropriate dimensions while maintaining visual quality
+     - Consider implementing responsive image loading for different viewport sizes
+     - Potentially apply slight visual effects to improve compression ratio
+     - Update the ResponsiveBackground component to use optimized images with appropriate settings
+
 ### 2025-02-28: Critical UI Fixes
 
 1. **Extended textarea height**

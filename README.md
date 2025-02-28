@@ -1,6 +1,3 @@
-[![CodeGuide](/codeguide-backdrop.svg)](https://codeguide.dev)
-
-
 # Ask Vipassana
 
 A mindful chatbot application providing authentic Vipassana Buddhist wisdom through a conversational interface. This tool offers clear guidance on meditation techniques, Dhamma teachings, and practical spiritual advice while maintaining the purity and non-commercial nature of Vipassana meditation.

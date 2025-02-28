@@ -4,11 +4,14 @@
 Implementing UI enhancements to improve the visual appeal and usability of the Ask Vipassana application.
 
 ## Current Tasks
-All critical UI issues have been fixed and tested:
 1. ✅ Extended text area height to prevent content truncation at bottom edge
 2. ✅ Debugged and restored functionality of theme toggle button
 3. ✅ Added CSS gradient mask/blur effect to chat container for smooth message fade transitions
 4. ✅ Fixed build errors and warnings
+5. 🔄 Optimize background image file size (currently 800KB)
+   - Target size reduction to under 200KB
+   - Maintain visual quality while improving performance
+   - Follow recommendations in background_optimization_plan.md
 
 ## Tasks Completed
 
@@ -73,6 +76,7 @@ All critical UI issues have been addressed. The application should now have:
 - Properly sized textarea that doesn't truncate content
 - Functional theme toggle button
 - Smooth gradient fade transitions for chat messages
+- Performance optimization needed for background image (currently 800KB)
 
 ## Next Tasks
 - Test the implemented fixes on various devices and screen sizes
