@@ -101,6 +101,21 @@ This document tracks key decisions made during the development of the Ask Vipass
 
 ## Technical Decisions
 
+### 2025-02-28: Analytics Implementation
+
+1. **Self-hosted Plausible Analytics**
+   - **Decision**: Implement self-hosted Plausible analytics script to bypass ad blockers
+   - **Rationale**: Ad blockers often block analytics scripts loaded from external domains, reducing visibility into site usage
+   - **Implementation**:
+     - Downloaded Plausible script and hosted it locally in `/public/js/analytics.js`
+     - Created a proxy endpoint at `/api/analytics/route.ts` to forward data to Plausible servers
+     - Modified the script to use the local proxy instead of connecting directly to Plausible
+     - Updated layout.tsx to load the local script instead of the external one
+   - **Benefits**:
+     - Analytics data will be collected even when ad blockers are enabled
+     - Maintains privacy-focused approach with no cookies or personal data collection
+     - Preserves all Plausible functionality while improving tracking reliability
+
 ### 2025-02-28: Build Error Fixes
 
 1. **Script Loading Strategy**

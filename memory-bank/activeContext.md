@@ -12,6 +12,10 @@ Implementing UI enhancements to improve the visual appeal and usability of the A
    - Target size reduction to under 200KB
    - Maintain visual quality while improving performance
    - Follow recommendations in background_optimization_plan.md
+6. ✅ Self-host Plausible analytics script to bypass ad blockers
+   - Downloaded and hosted the script locally
+   - Created a proxy endpoint to forward analytics data
+   - Updated script tag to use local version
 
 ## Tasks Completed
 
@@ -21,6 +25,12 @@ Implementing UI enhancements to improve the visual appeal and usability of the A
 
 2. **Implemented theme switch toggle**
    - Successfully integrated theme toggle for light/dark mode switching
+
+3. **Self-hosted Plausible analytics to bypass ad blockers**
+   - Downloaded and hosted Plausible script locally in public/js/analytics.js
+   - Created a proxy endpoint at /api/analytics/route.ts to forward data to Plausible servers
+   - Modified the script to use the local proxy instead of connecting directly to Plausible
+   - Updated layout.tsx to load the local script instead of the external one
 
 3. **Removed avatar icons and styled message bubbles distinctly**
    - Updated chat message component to remove avatar icons

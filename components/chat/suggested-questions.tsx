@@ -35,7 +35,7 @@ export function SuggestedQuestions({ onSelectQuestion }: SuggestedQuestionsProps
         <p className="text-sm text-muted-foreground text-center mb-4">
           Here are some questions to help you get started:
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3">
           {SUGGESTED_QUESTIONS.map((question, index) => (
             <SlideUp key={index} delay={index * 0.1} duration={0.8}>
               <CardBlur
@@ -45,7 +45,7 @@ export function SuggestedQuestions({ onSelectQuestion }: SuggestedQuestionsProps
               >
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-left font-normal h-auto py-2"
+                  className="w-full justify-start text-left font-normal h-auto py-3 px-4 whitespace-normal flex-wrap"
                   onClick={() => handleSelectQuestion(question, index)}
                 >
                   {question}

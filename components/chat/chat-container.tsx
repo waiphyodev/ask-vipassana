@@ -170,18 +170,22 @@ export function ChatContainer() {
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 overflow-y-auto scrollbar-hide">
-        <div className="px-4 pt-4 pb-32 space-y-4">
-          {/* Welcome message for first-time visitors */}
-          {isFirstVisit && messages.length === 0 && (
-            <WelcomeMessage />
+        <div className="px-4 pt-4 pb-32 space-y-4 min-h-[calc(100vh-200px)]">
+          {/* Welcome message for empty chat */}
+          {messages.length === 0 && (
+            <div className="flex justify-center w-full mt-8">
+              <WelcomeMessage />
+            </div>
           )}
 
-          {/* Suggested questions for first-time visitors */}
-          {isFirstVisit && messages.length === 0 && (
-            <SuggestedQuestions onSelectQuestion={handleSendMessage} />
+          {/* Suggested questions */}
+          {messages.length === 0 && (
+            <div className="max-h-[60vh] overflow-y-auto px-2 py-2">
+              <SuggestedQuestions onSelectQuestion={handleSendMessage} />
+            </div>
           )}
 
-          <div className="space-y-4 mt-24 mb-32">
+          <div className="space-y-4 mt-6 mb-32">
             <AnimatePresence initial={false}>
               {messages.map((message, index) => (
                 <SlideUp

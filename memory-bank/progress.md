@@ -75,6 +75,10 @@
   - Added 'defer' attribute to synchronous script in layout.tsx
   - Removed unused imports across multiple components
   - Fixed React Hook dependencies in meditation-timer.tsx using useCallback
+- [x] Self-hosted Plausible analytics to bypass ad blockers (2025-02-28)
+  - Downloaded and hosted Plausible script locally
+  - Created proxy endpoint to forward analytics data
+  - Modified script to use local proxy instead of external domain
 
 ## In Progress Features
 - [ ] Source reference system for citing original texts
