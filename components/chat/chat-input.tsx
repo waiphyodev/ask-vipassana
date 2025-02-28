@@ -19,7 +19,13 @@ export function ChatInput({ onSendMessage, isLoading }: ChatInputProps) {
     if (textareaRef.current) {
       textareaRef.current.style.height = "inherit"
       const scrollHeight = textareaRef.current.scrollHeight
+      // Limit max height to 200px to prevent content being cut off
       textareaRef.current.style.height = `${Math.min(scrollHeight, 200)}px`
+
+      // Ensure the cursor is visible by scrolling to bottom of textarea if needed
+      if (scrollHeight > 200) {
+        textareaRef.current.scrollTop = textareaRef.current.scrollHeight
+      }
     }
   }, [message])
 
@@ -47,7 +53,7 @@ export function ChatInput({ onSendMessage, isLoading }: ChatInputProps) {
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Ask a question about Vipassana meditation..."
-          className="min-h-[60px] w-full resize-none pr-16 rounded-2xl border-muted/30 focus:border-muted/50 transition-all duration-300"
+          className="min-h-[80px] max-h-[200px] w-full resize-none pr-16 rounded-2xl border-muted/30 focus:border-muted/50 transition-all duration-300 pb-4 pt-3 px-4"
           disabled={isLoading}
         />
         <div className="absolute bottom-3 right-3">

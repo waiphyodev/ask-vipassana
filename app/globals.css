@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Force theme refresh utility class */
+.force-theme-refresh {
+  /* This class doesn't need any properties, it's just used to trigger a re-render */
+}
+
 .logo-text {
   font-family: Parkinsans, sans-serif;
 }

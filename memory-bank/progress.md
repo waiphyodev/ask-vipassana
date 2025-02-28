@@ -60,6 +60,11 @@
 - [x] Repositioned "Clear Conversation" button on the right side
 - [x] Integrated meditation timer as link in chat interface
 - [x] Added subtle animation effects to message bubbles
+- [x] Fixed textarea height to prevent content being cut off at bottom
+- [x] Repaired non-functioning theme toggle button by using resolvedTheme
+- [x] Relocated theme toggle button to header/top navigation area
+- [x] Updated logo (reduced size, changed text to "Ask Teacher", decreased padding)
+- [x] Implemented gradient fade/blur effect at chat container boundaries
 
 ### Code Quality & Build Improvements
 - [x] Fixed ESLint errors in UI components
@@ -72,6 +77,16 @@
 - [ ] Enhanced error handling with calming messages
 - [ ] Browser testing and compatibility enhancements
 - [ ] Accessibility improvements
+
+## Recently Completed Features
+- [x] Fixed critical UI issues (2025-02-28)
+  - Extended textarea height with proper padding for better text visibility
+  - Limited textarea maximum height to 200px (reduced from 400px)
+  - Repaired theme toggle functionality to explicitly override system preferences
+  - Removed all gradient effects as they weren't working properly
+  - Fixed page height to match viewport exactly with overflow-hidden
+  - Changed chat input from sticky to fixed positioning at bottom of screen
+  - Increased bottom padding of content area to prevent overlap with fixed input
 
 ## Planned Features
 - [ ] User preferences for UI (font size)
@@ -110,7 +125,7 @@
 - [ ] Production deployment
 
 ## Next Steps
-1. Implement source reference system for citations
-2. Enhance error handling with calming messages
-3. Add user preferences panel
-4. Test the implementation across different browsers
+1. Test the recent UI fixes across different devices and browsers
+2. Implement source reference system for citations
+3. Enhance error handling with calming messages
+4. Add user preferences panel

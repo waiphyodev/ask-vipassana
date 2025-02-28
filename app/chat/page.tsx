@@ -5,6 +5,7 @@ import { ChatContainer } from "@/components/chat/chat-container"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { FadeIn, SlideUp } from "@/components/ui/animation-wrapper"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 export default function ChatPage() {
   const router = useRouter()
@@ -18,28 +19,29 @@ export default function ChatPage() {
   }, [])
 
   return (
-    <main className="flex min-h-screen flex-col">
-      <div className="flex-1 space-y-6 p-4 md:p-8 max-w-6xl mx-auto w-full">
+    <main className="flex h-screen flex-col overflow-hidden">
+      <div className="flex-1 space-y-6 p-4 md:p-8 max-w-6xl mx-auto w-full overflow-hidden">
         <FadeIn duration={1}>
-          <div className="flex items-center justify-center mb-8">
+          <div className="flex items-center justify-between mb-6">
             <SlideUp delay={0.2}>
               <button
                 onClick={() => router.push("/")}
-                className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                 title="Return to Home"
               >
-                <div className="relative h-10 w-10 overflow-hidden rounded-full">
+                <div className="relative h-8 w-8 overflow-hidden rounded-full">
                   <Image
                     src="/logo.webp"
                     alt="Vipassana Logo"
-                    width={40}
-                    height={40}
+                    width={32}
+                    height={32}
                     className="object-cover"
                   />
                 </div>
-                <h1 className="text-3xl font-semibold tracking-tight">Vipassana Guide</h1>
+                <h1 className="text-2xl font-semibold tracking-tight">Ask Teacher</h1>
               </button>
             </SlideUp>
+            <ThemeToggle />
           </div>
         </FadeIn>
         <ChatContainer />

@@ -3,14 +3,13 @@
 import { useState, useEffect } from "react"
 import { AnimatePresence } from "framer-motion"
 import { Bell } from "lucide-react"
-import { ChatMessage } from "./chat-message"
-import { ChatInput } from "./chat-input"
+import { ChatMessage } from "@/components/chat/chat-message"
+import { ChatInput } from "@/components/chat/chat-input"
 import { SlideUp, Breathing } from "../ui/animation-wrapper"
 import { FloatingBlur } from "../ui/blur-container"
 import { WelcomeMessage } from "./welcome-message"
 import { SuggestedQuestions } from "./suggested-questions"
 import { MeditationTimer } from "../meditation/meditation-timer"
-import { ThemeToggle } from "../ui/theme-toggle"
 import { Button } from "../ui/button"
 import { getInteractiveEffectClasses } from "@/utils/visual-effects"
 
@@ -169,13 +168,9 @@ export function ChatContainer() {
   }
 
   return (
-    <div className="flex h-screen flex-col space-y-4 relative">
-      {/* Theme Toggle Button - positioned at the top right */}
-      <div className="absolute top-4 right-4 z-10">
-        <ThemeToggle />
-      </div>
-
+    <div className="flex h-screen flex-col relative max-h-screen overflow-hidden">
       <div className="flex-1 space-y-4 overflow-y-auto scrollbar-thin p-4 pb-20 relative">
+        {/* Removed gradient overlays as requested */}
         {/* Welcome message for first-time visitors */}
         {isFirstVisit && messages.length === 0 && (
           <WelcomeMessage />
@@ -212,7 +207,7 @@ export function ChatContainer() {
         )}
       </div>
 
-      <FloatingBlur className="p-4 mx-auto w-full max-w-3xl">
+      <FloatingBlur className="p-4 mx-auto w-full max-w-3xl fixed bottom-0 left-0 right-0 z-10">
         <div className="relative">
           <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
           {messages.length > 0 && (
