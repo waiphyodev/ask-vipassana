@@ -66,7 +66,7 @@ export const ResponsiveBackground = ({
           fill
           priority
           sizes="(max-width: 640px) 640px, (max-width: 1280px) 1280px, 1920px"
-          className="opacity-100 dark:opacity-50 object-cover md:object-center object-left will-change-transform"
+          className="opacity-100 dark:opacity-50 object-cover xl:object-center object-left will-change-transform"
           quality={70}
         />
       </motion.div>
