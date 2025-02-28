@@ -1,0 +1,108 @@
+## Project Overview
+
+*   **Type:** cursor_project_rules
+*   **Description:** Ask Vipassana is a chatbot application for meditation practitioners to access authentic Vipassana Buddhist wisdom. It offers a minimalist, calm conversational interface with mindful animations and teacher-like responses based on Goenka teachings, while preserving user privacy through session-based localStorage.
+*   **Primary Goal:** Deliver a distraction-free, authentic, and privacy-centered conversational experience that provides clear spiritual guidance, maintains session context, and integrates subtle, mindful animations and a basic meditation timer.
+
+## Project Structure
+
+### Framework-Specific Routing
+
+*   **Directory Rules:**
+
+    *   **Next.js 14:** Uses the App Router with nested route folders. For example, routes are organized as `app/[route]/page.tsx` to ensure clear modularity and server actions integration.
+    *   Example: "Next.js 14 (App Router)" → `app/[route]/page.tsx` conventions
+    *   Example: "Next.js (Pages Router)" → would use `pages/[route].tsx` pattern (not applicable here)
+    *   Example: "React Router 6" → would use `src/routes/` with `createBrowserRouter` (for non-Next.js projects)
+
+### Core Directories
+
+*   **Versioned Structure:**
+
+    *   **app/api:** For Next.js 14 API routes using Route Handlers to interact with the N8N custom webhook endpoint.
+    *   **app/components:** For modular UI elements such as the minimalist chat interface, meditation timer, and subtle animated components.
+    *   **app/layouts:** For layout files like the root layout (`app/dashboard/layout.tsx`) that manage global app structure and styling.
+
+### Key Files
+
+*   **Stack-Versioned Patterns:**
+
+    *   **app/dashboard/layout.tsx:** Implements the Next.js 14 root layout with integrated server actions and mindful animations.
+    *   **app/landing/page.tsx:** Represents the clean, minimalist landing screen initiating the conversation flow with calming visuals.
+    *   **app/api/message/route.ts:** Defines API route handlers following Next.js 14 conventions for processing chat requests via POST JSON payloads.
+
+## Tech Stack Rules
+
+*   **Version Enforcement:**
+
+    *   **next@14:** Enforce the use of the App Router; avoid legacy methods like `getInitialProps` to maintain performance and streamlined routing.
+    *   **typescript@latest:** Use strict type checking and clearly defined interfaces to maintain code quality.
+    *   **tailwindcss:** Utilize Tailwind CSS configuration for a minimalist, natural color palette and efficient purge settings.
+    *   **shadcn/UI:** Follow design precepts for consistency and to streamline UI development.
+    *   **framer-motion:** Ensure animations are subtle, purposeful, and performance-optimized, reflecting natural phenomena like breathing or gentle fades.
+
+## PRD Compliance
+
+*   **Non-Negotiable:**
+
+    *   "A clean, minimalist chat interface that promotes a calm user experience." → The interface must remain distraction-free with ample white space and subtle animations.
+    *   "Contextual memory persists only within a session, storing chat history in localStorage with manual reset and an optional automatic clear after seven days." → Data privacy is paramount and must be enforced in the implementation.
+    *   "The system should provide calming fallback messages and logistics for retries (with exponential backoff) in case of API errors." → Robust error handling is required to ensure a seamless experience.
+
+## App Flow Integration
+
+*   **Stack-Aligned Flow:**
+
+    *   Example: "Next.js 14 Landing Flow → `app/landing/page.tsx` presents a calm welcome message with subtle breathing animations. Once interaction begins, the conversation flows into `app/chat/page.tsx`, integrating session-based context and a floating meditation timer."
+
+## Best Practices
+
+*   **Next.js 14**
+
+    *   Ensure usage of the App Router for modular routing and server actions.
+    *   Optimize performance with server-side and static rendering where applicable.
+    *   Maintain clear separation between layouts, pages, and API routes.
+
+*   **TypeScript**
+
+    *   Enforce strict typing and comprehensive interface definitions.
+    *   Use type-safe API interactions and component props to reduce runtime errors.
+    *   Leverage advanced TypeScript features for predictable code behavior.
+
+*   **Tailwind CSS**
+
+    *   Configure purge settings to remove unused styles and maintain performance.
+    *   Use utility-first classes to achieve a minimal and natural design aesthetic.
+    *   Align style choices with mindfulness principles (ample white space, earthy tones).
+
+*   **shadcn/UI**
+
+    *   Follow pre-designed component guidelines to ensure visual consistency.
+    *   Extend components cautiously to maintain simplicity and minimalism.
+    *   Ensure interactive elements are accessible and distraction-free.
+
+*   **Framer Motion**
+
+    *   Use animations that are subtle and enhance the user experience without overwhelming the interface.
+    *   Optimize animations for performance across devices.
+    *   Ensure that transitions (e.g., fades, pulses) echo natural rhythms like breathing.
+
+*   **N8N**
+
+    *   Implement robust error handling and retry mechanisms with exponential backoff.
+    *   Secure API endpoints using environment variables for authentication tokens.
+    *   Log errors subtly and provide calm, informative fallback messages to users.
+
+*   **localStorage**
+
+    *   Store only session-based context to ensure user privacy.
+    *   Provide manual options to clear chat history along with an automatic clearing function after seven days of inactivity.
+    *   Handle potential storage limits and data clearing events gracefully.
+
+## Rules
+
+*   Derive folder/file patterns directly from techStackDoc versions.
+*   If Next.js 14 App Router: Enforce use of the `app/` directory with nested route folders.
+*   If Pages Router: Use `pages/*.tsx` flat structure (not applicable here as we are using Next.js 14 App Router).
+*   Mirror this logic for React Router, SvelteKit, etc.
+*   Never mix version patterns (e.g., no `pages/` directory in App Router projects).
