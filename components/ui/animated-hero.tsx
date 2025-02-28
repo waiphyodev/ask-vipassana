@@ -1,12 +1,7 @@
-// @ts-ignore: Missing type declarations for react
 import { useEffect, useMemo, useState } from 'react'
-// @ts-ignore: Missing type declarations for framer-motion
 import { motion } from 'framer-motion'
-// @ts-ignore: Missing type declarations for lucide-react
-import { MoveRight, PhoneCall } from 'lucide-react'
-// @ts-ignore: Missing type declarations for Button component
+import { MoveRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-// @ts-ignore: Missing type declarations for next/image
 import Image from 'next/image'
 
 function Hero() {
