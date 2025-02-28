@@ -1,3 +1,31 @@
+<div align="center">
+  <a href="https://github.com/Saik0s/ask-vipassana">
+    <img src="/public/logo.webp" width="80">
+  </a>
+
+  <h3 align="center">Ask Vipassana</h3>
+
+  <p align="center">
+Welcome to Ask Vipassana, a mindful chatbot providing authentic Buddhist wisdom through a conversational interface. Access clear guidance on meditation techniques, Dhamma teachings, and practical spiritual advice—completely free from commercialization.
+  </p>
+</div>
+<hr />
+
+<div align="center">
+<img src=".github/screenshot.png" width="400" alt="Chat Interface Screenshot">
+</div>
+<hr />
+<p align="center">
+    <img src="https://img.shields.io/badge/Framework-Next.js%2014-black" />
+    <a href="https://x.com/sa1k0s">
+        <img src="https://img.shields.io/badge/Contact-@sa1k0s-purple.svg?style=flat" alt="Twitter: @sa1k0s" />
+    </a>
+    <a href="https://github.com/saik0s">
+        <img src="https://img.shields.io/badge/GitHub-saik0s-black.svg?style=flat" alt="GitHub: saik0s" />
+    </a>
+    <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat" alt="License">
+</p>
+
 # Ask Vipassana
 
 A mindful chatbot application providing authentic Vipassana Buddhist wisdom through a conversational interface. This tool offers clear guidance on meditation techniques, Dhamma teachings, and practical spiritual advice while maintaining the purity and non-commercial nature of Vipassana meditation.
@@ -96,7 +124,3 @@ The interface embodies core Vipassana principles:
 - No commercialization of Dhamma content
 - Easy conversation history clearing
 - Clear disclaimers about AI limitations
-
-## Contributing
-
-Contributions are welcome! Please ensure they align with the project's ethical guidelines and maintain its non-commercial nature.
