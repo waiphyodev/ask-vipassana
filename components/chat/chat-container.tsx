@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { AnimatePresence } from "framer-motion"
 import { Bell } from "lucide-react"
 import { ChatMessage } from "@/components/chat/chat-message"
@@ -24,6 +24,15 @@ export function ChatContainer() {
   const [messages, setMessages] = useState<Message[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [isTimerOpen, setIsTimerOpen] = useState(false)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const chatContainerRef = useRef<HTMLDivElement>(null)
+
+  // Function to scroll to bottom of messages
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
+    }
+  }
 
   useEffect(() => {
     // Load chat history from localStorage
@@ -54,6 +63,11 @@ export function ChatContainer() {
     // Update last activity timestamp
     localStorage.setItem("vipassana-last-activity", Date.now().toString())
   }, [])
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   const saveMessages = (newMessages: Message[]) => {
     setMessages(newMessages)
@@ -167,8 +181,8 @@ export function ChatContainer() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto scrollbar-hide">
-        <div className="px-4  mt-24 mb-40 space-y-4 min-h-[calc(100vh-200px)]">
+      <div className="flex-1 overflow-y-auto scrollbar-hide" ref={chatContainerRef}>
+        <div className="px-4  mt-24 mb-48 space-y-4 min-h-[calc(100vh-200px)]">
           {/* Welcome message for empty chat */}
           {messages.length === 0 && (
             <div className="flex justify-center w-ful ">
@@ -206,6 +220,8 @@ export function ChatContainer() {
                 <div dangerouslySetInnerHTML={{ __html: '<lord-icon src="https://cdn.lordicon.com/nrqdaujr.json" trigger="loop" delay="500" colors="primary:#D2885A" style="width:100px;height:100px"></lord-icon>' }} />
               </Breathing>
             )}
+            {/* Invisible element to scroll to */}
+            <div ref={messagesEndRef} />
           </div>
         </div>
       </div>
@@ -225,6 +241,11 @@ export function ChatContainer() {
                   <Bell className="h-3 w-3 mr-1" />
                   Meditation Timer
                 </Button>
+
+                <footer className="text-center text-xs text-white/70">
+                  <p>Created with ❤️ by <a href="https://tarasenko.dev?utm_source=askvipassana" target="_blank" rel="noopener noreferrer" className="underline hover:text-white transition-colors">Igor Tarasenko</a></p>
+                </footer>
+
                 <button
                   onClick={clearHistory}
                   className={getInteractiveEffectClasses("text-xs text-muted-foreground hover:text-foreground")}

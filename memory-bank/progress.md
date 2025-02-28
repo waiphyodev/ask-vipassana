@@ -26,6 +26,7 @@
 - [x] Improved message styling with distinct role-based appearance
 - [x] Added glow and shine animations to message bubbles
 - [x] Sound feedback for meditation timer completion
+- [x] Auto-scroll to bottom when new messages appear
 
 ### Backend Integration
 - [x] API route for chat functionality
@@ -65,6 +66,7 @@
 - [x] Relocated theme toggle button to header/top navigation area
 - [x] Updated logo (reduced size, changed text to "Ask Teacher", decreased padding)
 - [x] Implemented gradient fade/blur effect at chat container boundaries
+- [x] Added developer attribution footer with links to personal website and social media
 
 ### Code Quality & Build Improvements
 - [x] Fixed ESLint errors in UI components
@@ -95,6 +97,12 @@
   - Fixed page height to match viewport exactly with overflow-hidden
   - Changed chat input from sticky to fixed positioning at bottom of screen
   - Increased bottom padding of content area to prevent overlap with fixed input
+- [x] Implemented auto-scroll to bottom on new message (2025-02-28)
+  - Added automatic scrolling when new messages are added to the chat
+  - Ensures the latest message is always visible to the user
+  - Improves user experience by eliminating the need to manually scroll
+  - Implemented with direct scrollTop manipulation for better control
+  - Applied ref to the scrollable container for proper containment
 
 ## Planned Features
 - [ ] User preferences for UI (font size)

@@ -4,6 +4,18 @@ This document tracks key decisions made during the development of the Ask Vipass
 
 ## UI/UX Decisions
 
+### 2025-02-28: Auto-Scroll Implementation
+
+1. **Implement auto-scroll to bottom on new messages**
+   - **Decision**: Add automatic scrolling functionality to ensure the latest message is always visible
+   - **Rationale**: Improves user experience by eliminating the need for manual scrolling, ensuring users always see the most recent content
+   - **Implementation Strategy**:
+     - Added useRef to track the scrollable chat container
+     - Created a scrollToBottom function that directly sets scrollTop to scrollHeight
+     - Set up a useEffect hook to trigger scrolling whenever messages array changes
+     - Maintained the invisible div at the end of messages for future reference
+     - Applied the ref to the actual scrollable container instead of using scrollIntoView
+
 ### 2025-02-28: Background Image Optimization
 
 1. **Reduce Background Image File Size**
@@ -98,6 +110,15 @@ This document tracks key decisions made during the development of the Ask Vipass
     - **Decision**: Implement gradient fade/blur effect at chat container edges
     - **Rationale**: Provides visual cues about scrollable content and creates a more polished interface with natural transitions
     - **Implementation**: Added gradient overlay divs at top and bottom of the chat container with appropriate z-index
+
+11. **Added developer attribution footer**
+    - **Decision**: Add a footer with developer attribution and links
+    - **Rationale**: Provides proper attribution to the developer and creates professional branding
+    - **Implementation**:
+      - Added a responsive footer section in the layout.tsx file
+      - Included "Created with ❤️ by Igor Tarasenko" text
+      - Added links to personal website (tarasenko.dev) and social media (x.com/sa1k0s)
+      - Styled with subtle hover effects and proper spacing
 
 ## Technical Decisions
 

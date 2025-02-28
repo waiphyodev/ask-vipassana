@@ -16,10 +16,22 @@ Implementing UI enhancements to improve the visual appeal and usability of the A
    - Downloaded and hosted the script locally
    - Created a proxy endpoint to forward analytics data
    - Updated script tag to use local version
+7. ✅ Implemented auto-scroll to bottom on new message
+   - Added useRef to track the scrollable chat container
+   - Created scrollToBottom function that directly sets scrollTop
+   - Set up useEffect to trigger scroll on messages change
+   - Applied ref to the scrollable container for proper scrolling
 
 ## Tasks Completed
 
-1. **Removed scrollbars and disabled main container scrolling**
+1. **Implemented auto-scroll to bottom on new messages**
+   - Added useRef to track the scrollable chat container
+   - Created scrollToBottom function that directly sets scrollTop to scrollHeight
+   - Set up useEffect hook to trigger scrolling when messages change
+   - Applied ref to the actual scrollable container for proper scrolling
+   - Ensures users always see the most recent message without manual scrolling
+
+2. **Removed scrollbars and disabled main container scrolling**
    - Applied scrollbar-hide CSS classes to create a cleaner interface
    - Configured container to prevent page scrolling while allowing chat content scrolling
 
@@ -31,6 +43,11 @@ Implementing UI enhancements to improve the visual appeal and usability of the A
    - Created a proxy endpoint at /api/analytics/route.ts to forward data to Plausible servers
    - Modified the script to use the local proxy instead of connecting directly to Plausible
    - Updated layout.tsx to load the local script instead of the external one
+
+4. **Added developer attribution footer**
+   - Added "Created with ❤️ by Igor Tarasenko" at the bottom of all pages
+   - Included links to tarasenko.dev and x.com/sa1k0s
+   - Implemented with a responsive footer in the main layout
 
 3. **Removed avatar icons and styled message bubbles distinctly**
    - Updated chat message component to remove avatar icons
