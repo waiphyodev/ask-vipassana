@@ -168,67 +168,72 @@ export function ChatContainer() {
   }
 
   return (
-    <div className="flex h-screen flex-col relative max-h-screen overflow-hidden">
-      <div className="flex-1 space-y-4 overflow-y-auto scrollbar-thin p-4 pb-20 relative">
-        {/* Removed gradient overlays as requested */}
-        {/* Welcome message for first-time visitors */}
-        {isFirstVisit && messages.length === 0 && (
-          <WelcomeMessage />
-        )}
+    <div className="flex flex-col h-full">
+      <div className="flex-1 overflow-y-auto scrollbar-thin">
+        <div className="px-4 pt-4 pb-32 space-y-4">
+          {/* Welcome message for first-time visitors */}
+          {isFirstVisit && messages.length === 0 && (
+            <WelcomeMessage />
+          )}
 
-        {/* Suggested questions for first-time visitors */}
-        {isFirstVisit && messages.length === 0 && (
-          <SuggestedQuestions onSelectQuestion={handleSendMessage} />
-        )}
+          {/* Suggested questions for first-time visitors */}
+          {isFirstVisit && messages.length === 0 && (
+            <SuggestedQuestions onSelectQuestion={handleSendMessage} />
+          )}
 
-        <AnimatePresence initial={false}>
-          {messages.map((message, index) => (
-            <SlideUp
-              key={message.id}
-              delay={index * 0.1}
-              duration={0.8}
-              className="w-full"
-            >
-              <ChatMessage
-                message={message}
-                onDelete={handleDeleteMessage}
-                onRefresh={message.role === "user" ? handleRefreshFromMessage : undefined}
-              />
-            </SlideUp>
-          ))}
-        </AnimatePresence>
+          <div className="space-y-4 mt-24 mb-32">
+            <AnimatePresence initial={false}>
+              {messages.map((message, index) => (
+                <SlideUp
+                  key={message.id}
+                  delay={index * 0.1}
+                  duration={0.8}
+                  className="w-full"
+                >
+                  <ChatMessage
+                    message={message}
+                    onDelete={handleDeleteMessage}
+                    onRefresh={message.role === "user" ? handleRefreshFromMessage : undefined}
+                  />
+                </SlideUp>
+              ))}
+            </AnimatePresence>
 
-        {isLoading && (
-          <Breathing className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <div className="h-2 w-2 rounded-full bg-muted-foreground" />
-            <div className="h-2 w-2 rounded-full bg-muted-foreground" />
-            <div className="h-2 w-2 rounded-full bg-muted-foreground" />
-          </Breathing>
-        )}
+            {isLoading && (
+              <Breathing className="flex items-center space-x-2 text-sm text-muted-foreground">
+                <div className="h-2 w-2 rounded-full bg-muted-foreground" />
+                <div className="h-2 w-2 rounded-full bg-muted-foreground" />
+                <div className="h-2 w-2 rounded-full bg-muted-foreground" />
+              </Breathing>
+            )}
+          </div>
+        </div>
       </div>
 
-      <FloatingBlur className="p-4 mx-auto w-full max-w-3xl fixed bottom-0 left-0 right-0 z-10">
-        <div className="relative">
-          <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
-          {messages.length > 0 && (
-            <div className="flex justify-between items-center mt-2 gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex items-center text-xs text-muted-foreground hover:text-foreground"
-                onClick={() => setIsTimerOpen(true)}
-              >
-                <Bell className="h-3 w-3 mr-1" />
-                Meditation Timer
-              </Button>
-              <button
-                onClick={clearHistory}
-                className={getInteractiveEffectClasses("text-xs text-muted-foreground hover:text-foreground")}
-              >
-                Clear Conversation
-              </button>
-            </div>
-          )}
+      <FloatingBlur className="fixed bottom-0 left-0 right-0 z-50 border-t border-border/40 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="w-full max-w-3xl mx-auto px-4 py-4">
+          <div className="relative">
+            <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
+            {messages.length > 0 && (
+              <div className="flex justify-between items-center mt-2 gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center text-xs text-muted-foreground hover:text-foreground"
+                  onClick={() => setIsTimerOpen(true)}
+                >
+                  <Bell className="h-3 w-3 mr-1" />
+                  Meditation Timer
+                </Button>
+                <button
+                  onClick={clearHistory}
+                  className={getInteractiveEffectClasses("text-xs text-muted-foreground hover:text-foreground")}
+                >
+                  Clear Conversation
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </FloatingBlur>
 

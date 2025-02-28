@@ -38,8 +38,8 @@ export function ChatMessage({ message, onDelete, onRefresh }: ChatMessageProps) 
       className={cn(
         "w-full mb-4 transition-all duration-500 group max-w-[85%]",
         isAssistant
-          ? "bg-muted/30 border border-muted/20 rounded-lg rounded-bl-sm p-4 ml-0 mr-auto"
-          : "bg-primary/10 border border-primary/10 rounded-lg rounded-br-sm p-4 ml-auto mr-0",
+          ? "bg-muted/30 dark:bg-muted/20 border border-muted/20 rounded-lg rounded-bl-sm p-4 ml-0 mr-auto"
+          : "bg-primary/5 dark:bg-primary/20 border border-primary/10 rounded-lg rounded-br-sm p-4 ml-auto mr-0 hover:bg-primary/10 dark:hover:bg-primary/30",
         getInteractiveEffectClasses(),
         getGlowEffectClasses("", !isAssistant),
         getShineAnimationClasses()

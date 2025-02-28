@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     }
 
     const data = await response.json()
-    let output = data.output
+    let output = data.response.text
 
     // Remove any <think> tags from the output
     if (output) {
