@@ -89,6 +89,23 @@ This document tracks key decisions made during the development of the Ask Vipass
 
 ## Technical Decisions
 
+### 2025-02-28: Build Error Fixes
+
+1. **Script Loading Strategy**
+   - **Decision**: Add 'defer' attribute to synchronous script in layout.tsx
+   - **Rationale**: Prevents blocking page rendering while loading external scripts, following Next.js best practices
+   - **Implementation**: Modified the script tag for lordicon.js to include the defer attribute
+
+2. **Code Cleanup**
+   - **Decision**: Remove unused imports across multiple components
+   - **Rationale**: Improves code quality, reduces bundle size, and eliminates ESLint warnings
+   - **Implementation**: Removed unused imports from app/page.tsx, components/chat/chat-container.tsx, and components/chat/chat-message.tsx
+
+3. **React Hook Optimization**
+   - **Decision**: Wrap playCompletionSound function in useCallback in meditation-timer.tsx
+   - **Rationale**: Prevents unnecessary re-creation of the function on each render and fixes React Hook dependency warning
+   - **Implementation**: Imported useCallback and wrapped the function with proper dependencies
+
 ### 2025-01-15: Initial Project Setup
 
 1. **Framework Selection**

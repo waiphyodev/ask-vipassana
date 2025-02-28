@@ -8,7 +8,6 @@ import {
   getInteractiveEffectClasses,
   getDeleteButtonEffectClasses,
   getRefreshButtonEffectClasses,
-  getGlowEffectClasses,
   getShineAnimationClasses
 } from "@/utils/visual-effects"
 import ReactMarkdown from "react-markdown"

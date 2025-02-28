@@ -33,7 +33,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         <script defer data-domain="askvipassana.com" src="https://plausible.z3n.sh/js/script.js"></script>
-        <script src="https://cdn.lordicon.com/lordicon.js"></script>
+        <script defer src="https://cdn.lordicon.com/lordicon.js"></script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background no-page-scroll`}>
         <ThemeProvider

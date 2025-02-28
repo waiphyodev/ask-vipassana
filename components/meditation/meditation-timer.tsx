@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Breathing, FadeIn } from "@/components/ui/animation-wrapper"
@@ -29,7 +29,7 @@ export function MeditationTimer({ open, onOpenChange }: MeditationTimerProps) {
   const audioContextRef = useRef<AudioContext | null>(null)
 
   // Create a function to play meditation bell sound
-  const playCompletionSound = () => {
+  const playCompletionSound = useCallback(() => {
     if (!soundEnabled) return;
 
     try {
@@ -59,7 +59,7 @@ export function MeditationTimer({ open, onOpenChange }: MeditationTimerProps) {
     } catch (error) {
       console.error("Error playing completion sound:", error);
     }
-  }
+  }, [soundEnabled]);
 
   // Format time as MM:SS
   const formatTime = (seconds: number): string => {
@@ -125,7 +125,7 @@ export function MeditationTimer({ open, onOpenChange }: MeditationTimerProps) {
         clearInterval(intervalRef.current)
       }
     }
-  }, [isActive, isPaused, isCompleted])
+  }, [isActive, isPaused, isCompleted, playCompletionSound])
 
   // Toggle sound
   const toggleSound = () => {

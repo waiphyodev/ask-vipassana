@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { AnimatePresence } from "framer-motion"
 import { Bell } from "lucide-react"
 import { ChatMessage } from "@/components/chat/chat-message"
@@ -12,16 +12,6 @@ import { SuggestedQuestions } from "./suggested-questions"
 import { MeditationTimer } from "../meditation/meditation-timer"
 import { Button } from "../ui/button"
 import { getInteractiveEffectClasses } from "@/utils/visual-effects"
-import Image from "next/image"
-import { Message } from "@/lib/types"
-import { toast } from "sonner"
-import { usePrevious } from "@/lib/hooks/use-previous"
-import { Input } from "../ui/input"
-import { CircleX, RefreshCcw, SendIcon } from "lucide-react"
-import { useLocalStorage } from "@/lib/hooks/use-local-storage"
-import { ChatSettings } from "./chat-settings"
-import { LoadingDots } from "../ui/loading-dots"
-import { useChat } from "@/lib/hooks/use-chat"
 
 export type Message = {
   id: string

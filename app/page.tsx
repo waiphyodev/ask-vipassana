@@ -3,7 +3,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { SlideUp, FadeIn } from "@/components/ui/animation-wrapper"
-import { FloatingBlur } from "@/components/ui/blur-container"
 
 export default function Home() {
   return (
