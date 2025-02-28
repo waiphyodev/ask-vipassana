@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { AnimatePresence } from "framer-motion"
 import { Bell } from "lucide-react"
 import { ChatMessage } from "@/components/chat/chat-message"
@@ -12,6 +12,16 @@ import { SuggestedQuestions } from "./suggested-questions"
 import { MeditationTimer } from "../meditation/meditation-timer"
 import { Button } from "../ui/button"
 import { getInteractiveEffectClasses } from "@/utils/visual-effects"
+import Image from "next/image"
+import { Message } from "@/lib/types"
+import { toast } from "sonner"
+import { usePrevious } from "@/lib/hooks/use-previous"
+import { Input } from "../ui/input"
+import { CircleX, RefreshCcw, SendIcon } from "lucide-react"
+import { useLocalStorage } from "@/lib/hooks/use-local-storage"
+import { ChatSettings } from "./chat-settings"
+import { LoadingDots } from "../ui/loading-dots"
+import { useChat } from "@/lib/hooks/use-chat"
 
 export type Message = {
   id: string
@@ -200,10 +210,8 @@ export function ChatContainer() {
             </AnimatePresence>
 
             {isLoading && (
-              <Breathing className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <div className="h-2 w-2 rounded-full bg-muted-foreground" />
-                <div className="h-2 w-2 rounded-full bg-muted-foreground" />
-                <div className="h-2 w-2 rounded-full bg-muted-foreground" />
+              <Breathing className="flex items-center justify-center text-sm text-muted-foreground">
+                <div dangerouslySetInnerHTML={{ __html: '<lord-icon src="https://cdn.lordicon.com/nrqdaujr.json" trigger="loop" delay="500" colors="primary:#D2885A" style="width:100px;height:100px"></lord-icon>' }} />
               </Breathing>
             )}
           </div>

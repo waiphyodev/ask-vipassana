@@ -118,6 +118,9 @@ const config: Config = {
 					'0%, 100%': { left: '-100%' },
 					'30%, 70%': { left: '100%' },
 					'50%': { left: '100%' }
+				},
+				'spin': {
+					'to': { transform: 'rotate(360deg)' }
 				}
 			},
 			animation: {
@@ -130,7 +133,8 @@ const config: Config = {
 				'scale-in': 'scale-in 0.8s ease-out',
 				'breathing': 'breathing 2s ease-in-out infinite',
 				'shine': 'shine 8s ease-in-out infinite',
-				'shine-slow': 'shine-slow 15s ease-in-out infinite'
+				'shine-slow': 'shine-slow 15s ease-in-out infinite',
+				'spin-slow': 'spin 3s linear infinite'
 			},
 		}
 	},
