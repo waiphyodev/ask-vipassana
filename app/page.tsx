@@ -35,17 +35,31 @@ export default function Home() {
           </p>
         </FadeIn>
 
-        <FadeIn delay={0.8} duration={1.5}>
-          <p className="max-w-[600px] mx-auto text-muted-foreground text-lg leading-relaxed tracking-wide">
-            Ask questions, receive clear meditation instructions, and discover daily applications of profound Dhamma teachings—accessible, direct, and completely free from commercialization.
-          </p>
-        </FadeIn>
+        <div className="responsive-height">
+          <style jsx>{`
+            @media (max-height: 700px) {
+              .responsive-height {
+                display: none;
+              }
+            }
+            @media (min-height: 701px) {
+              .responsive-height {
+                display: block;
+              }
+            }
+          `}</style>
+          <FadeIn delay={0.8} duration={1.5}>
+            <p className="max-w-[600px] mx-auto text-muted-foreground text-lg leading-relaxed tracking-wide">
+              Ask questions, receive clear meditation instructions, and discover daily applications of profound Dhamma teachings—accessible, direct, and completely free from commercialization.
+            </p>
+          </FadeIn>
 
-        <FadeIn delay={1.0} duration={1.5}>
-          <p className="max-w-[600px] mx-auto text-muted-foreground text-lg leading-relaxed tracking-wide">
-            Clear your mind. Take your first step.
-          </p>
-        </FadeIn>
+          <FadeIn delay={1.0} duration={1.5}>
+            <p className="max-w-[600px] mx-auto text-muted-foreground text-lg leading-relaxed tracking-wide">
+              Clear your mind. Take your first step.
+            </p>
+          </FadeIn>
+        </div>
 
         <FadeIn delay={1.2} duration={1.5}>
           <Link
