@@ -37,12 +37,12 @@ export default function Home() {
 
         <div className="responsive-height">
           <style jsx>{`
-            @media (max-height: 700px) {
+            @media (max-height: 800px) {
               .responsive-height {
                 display: none;
               }
             }
-            @media (min-height: 701px) {
+            @media (min-height: 801px) {
               .responsive-height {
                 display: block;
               }
