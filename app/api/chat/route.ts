@@ -1,54 +1,56 @@
-import { NextResponse } from "next/server"
-import type { Message } from "@/components/chat/chat-container"
-
-if (!process.env.NEXT_N8N_API_ENDPOINT) {
-  throw new Error("Missing NEXT_N8N_API_ENDPOINT environment variable")
-}
-if (!process.env.NEXT_N8N_API_TOKEN) {
-  throw new Error("Missing NEXT_N8N_API_TOKEN environment variable")
-}
-
-const NEXT_N8N_API_ENDPOINT = process.env.NEXT_N8N_API_ENDPOINT as string
+import { NextResponse } from 'next/server'
+import type { Message } from '@/components/chat/chat-container'
+import { ChatGroq } from '@langchain/groq'
+import { ChatPromptTemplate } from '@langchain/core/prompts'
 
 export async function POST(req: Request) {
   try {
     const { chatInput, history } = await req.json()
 
-    const response = await fetch(NEXT_N8N_API_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.NEXT_N8N_API_TOKEN}`,
-      },
-      body: JSON.stringify({
-        chatInput,
-        history: history.map((msg: Message) => ({
-          role: msg.role,
-          content: msg.content,
-        })),
-      }),
+    const model = new ChatGroq({
+      model: 'llama-3.3-70b-versatile',
+      temperature: 0,
     })
 
-    if (!response.ok) {
-      throw new Error("Failed to get response from N8N")
-    }
+    // Format conversation history for LangChain
+    const messages = history.map((msg: Message) => ({
+      role: msg.role,
+      content: msg.content,
+    }))
 
-    const data = await response.json()
-    let output = data.response.text
+    // Build a prompt template (system + user context)
+    const prompt = ChatPromptTemplate.fromMessages([
+      [
+        'system',
+        'A mindful chatbot providing authentic Vipassana Buddhist wisdom. Offer clear guidance on meditation techniques, Dhamma teachings, and practical spiritual advice. You are a Dhamma guide trained in Vipassana as taught by S.N. Goenka and the Buddha. You do not offer psychological therapy or personal opinions. You reference original texts (Tipitaka) or Goenka’s discourses. Your tone is calm, clear, and equanimous.',
+      ],
+      ...messages.map((m: { role: string; content: string }) => [m.role, m.content]),
+      ['user', chatInput],
+    ])
 
-    // Remove any <think> tags from the output
-    if (output) {
+    // Create a runnable chain
+    const chain = prompt.pipe(model)
+
+    // Generate response
+    const result = await chain.invoke({})
+
+    // Clean up unwanted tags if any
+    let output = result.content
+    if (typeof output === 'string') {
       output = output.replace(/<think>[\s\S]*?<\/think>/g, '').trim()
     }
 
     return NextResponse.json({
-      message: output || "I apologize, but I'm having trouble understanding. Could you please rephrase your question?",
+      message:
+        output ||
+        "I apologize, but I'm having trouble understanding. Could you please rephrase your question?",
     })
   } catch (error) {
-    console.error("Chat API Error:", error)
+    console.error('Chat API Error:', error)
     return NextResponse.json(
       {
-        message: "I apologize, but I'm having trouble responding right now. Please try again in a moment.",
+        message:
+          "I apologize, but I'm having trouble responding right now. Please try again in a moment.",
       },
       { status: 500 }
     )

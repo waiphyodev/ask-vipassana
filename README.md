@@ -70,7 +70,7 @@ A mindful chatbot application providing authentic Vipassana Buddhist wisdom thro
      ```bash
      cp .env.example .env
      ```
-   - Add your N8N API endpoint and token
+   - Add your Groq API key
 
 4. **Start the development server**
    ```bash
@@ -88,9 +88,7 @@ A mindful chatbot application providing authentic Vipassana Buddhist wisdom thro
 Create a `.env` file in the root directory with the following variables:
 
 ```env
-# N8N API
-NEXT_PUBLIC_N8N_API_ENDPOINT=your_n8n_endpoint
-NEXT_PUBLIC_N8N_API_TOKEN=your_api_token
+GROQ_API_KEY=your-groq-api-key
 ```
 
 ## Project Structure

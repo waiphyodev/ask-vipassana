@@ -1,0 +1,22 @@
+# Ignore node modules (they’ll be reinstalled in Docker)
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Ignore build artifacts
+.next
+out
+dist
+
+# Environment files
+.env.development
+.env.production
+
+# Git and editor configs
+.git
+.gitignore
+.vscode
+.DS_Store
+
+# OS / logs
+*.log
