@@ -8,8 +8,7 @@ export async function POST(req: Request) {
     const { chatInput, history } = await req.json()
 
     const model = new ChatGroq({
-      model: 'llama-3.3-70b-versatile',
-      temperature: 0,
+      model: 'llama-3.1-8b-instant',
     })
 
     // Format conversation history for LangChain
