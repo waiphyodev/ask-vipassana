@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server'
 import type { Message } from '@/components/chat/chat-container'
-import { ChatGroq } from '@langchain/groq'
 import { ChatPromptTemplate } from '@langchain/core/prompts'
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai"
 
 export async function POST(req: Request) {
   try {
     const { chatInput, history } = await req.json()
 
-    const model = new ChatGroq({
-      model: 'llama-3.1-8b-instant',
+    const model = new ChatGoogleGenerativeAI({
+      model: 'gemini-2.0-flash-lite',
     })
 
     // Format conversation history for LangChain
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     const prompt = ChatPromptTemplate.fromMessages([
       [
         'system',
-        'A mindful chatbot providing authentic Vipassana Buddhist wisdom. Offer clear guidance on meditation techniques, Dhamma teachings, and practical spiritual advice. You are a Dhamma guide trained in Vipassana as taught by S.N. Goenka and the Buddha. You do not offer psychological therapy or personal opinions. You reference original texts (Tipitaka) or Goenka’s discourses. Your tone is calm, clear, and equanimous.',
+        process.env.SYSTEM_MESSAGE || 'A mindful chatbot providing authentic Vipassana Buddhist wisdom. Offer clear guidance on meditation techniques, Dhamma teachings, and practical spiritual advice. You are a Dhamma guide trained in Vipassana as taught by S.N. Goenka and the Buddha. You do not offer psychological therapy or personal opinions. You reference original texts (Tipitaka) or Goenka’s discourses. Your tone is calm, clear, and equanimous.',
       ],
       ...messages.map((m: { role: string; content: string }) => [m.role, m.content]),
       ['user', chatInput],
@@ -35,6 +35,7 @@ export async function POST(req: Request) {
 
     // Clean up unwanted tags if any
     let output = result.content
+
     if (typeof output === 'string') {
       output = output.replace(/<think>[\s\S]*?<\/think>/g, '').trim()
     }

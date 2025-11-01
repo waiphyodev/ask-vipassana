@@ -243,14 +243,14 @@ export function ChatContainer() {
                 </Button>
 
                 <footer className="text-center text-xs">
-                  <p>Created with ❤️ by <a href="https://tarasenko.dev?utm_source=askvipassana" target="_blank" rel="noopener noreferrer" className="underline hover:text-white transition-colors">Igor Tarasenko</a></p>
+                  <p>Forked from <a href="https://tarasenko.dev?utm_source=askvipassana" target="_blank" rel="noopener noreferrer" className="underline hover:text-white transition-colors">Igor Tarasenko</a></p>
                 </footer>
 
                 <button
                   onClick={clearHistory}
                   className={getInteractiveEffectClasses("text-xs text-muted-foreground hover:text-foreground")}
                 >
-                  Clear Conversation
+                  ပြောဆိုထားသည်များအား ဖျက်ရန်
                 </button>
               </div>
             )}

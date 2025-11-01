@@ -42,7 +42,7 @@ export default function ChatPage() {
                         className="object-cover"
                       />
                     </div>
-                    <h1 className="text-2xl font-semibold tracking-tight">Ask Vipassana</h1>
+                    <h1 className="text-2xl font-semibold tracking-tight">ဝိပဿနာ အမေးအဖြေ</h1>
                   </button>
                 </SlideUp>
               </FadeIn>

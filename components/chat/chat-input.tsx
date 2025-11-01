@@ -52,7 +52,7 @@ export function ChatInput({ onSendMessage, isLoading }: ChatInputProps) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Ask a question about Vipassana meditation..."
+          placeholder="မေးခွန်းမေးရန်..."
           className="min-h-[80px] max-h-[200px] w-full resize-none pr-16 rounded-2xl border-muted/30 focus:border-muted/50 transition-all duration-300 pb-4 pt-3 px-4"
           disabled={isLoading}
         />

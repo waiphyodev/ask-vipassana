@@ -46,7 +46,7 @@ export function ChatMessage({ message, onDelete, onRefresh }: ChatMessageProps) 
       <div className="flex-1 space-y-4">
         <FadeIn duration={1.2}>
           <div className={cn(
-            "prose prose-sm prose-p:leading-relaxed prose-p:tracking-wide prose-p:my-3 prose-headings:mb-3 prose-headings:mt-5 max-w-none",
+            "prose prose-sm prose-p:leading-loose prose-p:tracking-wide prose-p:my-3 prose-headings:mb-3 prose-headings:mt-5 max-w-none",
             isAssistant
               ? "prose-pre:bg-[#E5D9C9]/50 prose-pre:border prose-pre:border-[#E5D9C9]/40 prose-pre:rounded-md dark:prose-invert dark:prose-pre:bg-[#332E2B] dark:prose-pre:border-[#E5D9C9]/30"
               : "prose-pre:bg-[#FAF9F6] prose-pre:border prose-pre:border-[#D2885A]/10 prose-pre:rounded-md dark:prose-invert dark:prose-pre:bg-[#D2885A]/20 dark:prose-pre:border-[#D2885A]/30"
